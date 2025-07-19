@@ -1,5 +1,9 @@
 function page() {
-  return <div>About</div>
+  return (
+    <div className="flex justify-center p-10">
+      <h1 className="text-4xl">About page - in progress</h1>
+    </div>
+  )
 }
 
 export default page
