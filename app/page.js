@@ -54,8 +54,8 @@ export default function Home() {
         >
           <Image
             aria-hidden
-            src="/file.svg"
-            alt="File icon"
+            src="/chat.svg"
+            alt="Chat icon"
             width={16}
             height={16}
           />
@@ -68,8 +68,8 @@ export default function Home() {
         >
           <Image
             aria-hidden
-            src="/window.svg"
-            alt="Window icon"
+            src="/question.svg"
+            alt="question icon"
             width={16}
             height={16}
           />
