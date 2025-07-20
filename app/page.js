@@ -16,7 +16,7 @@ export default function Home() {
         />
         <Image
           className="self-center"
-          src="/logo.png"
+          src="/logo.svg"
           alt="Next.js logo"
           width={180}
           height={38}

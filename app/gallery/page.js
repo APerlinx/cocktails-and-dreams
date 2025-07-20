@@ -1,13 +1,18 @@
-import Link from 'next/link'
 import Footer from '../_components/Footer'
 import GalleryGrid from './GalleryGrid'
 
-function page() {
+async function page() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/gallery`, {
+    cache: 'no-store',
+  })
+  const media = await res.json()
+  console.log(media)
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <h1 className="text-4xl">Gallery page - in progress</h1>
-      <GalleryGrid />
-      <Link href="/">Go back</Link>
+    <div className="font-sans grid grid-rows-[auto_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+      <div>
+        <GalleryGrid media={media} />
+      </div>
       <Footer />
     </div>
   )

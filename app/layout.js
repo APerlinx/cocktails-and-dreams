@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata = {
-  title: 'Cocktail and dreams',
+  title: 'Cocktails and dreams',
   description: 'Cocktail and dreams website',
 }
 
