@@ -1,49 +1,35 @@
 'use client'
-import { CldImage } from 'next-cloudinary'
+import { CldImage, CldVideoPlayer } from 'next-cloudinary'
 
-export default function GalleryGrid() {
+export default function GalleryGrid({ media }) {
   return (
-    <div className="flex gap-1">
-      <CldImage
-        src="cld-sample-5"
-        width="200"
-        height="200"
-        crop={{
-          type: 'auto',
-          source: true,
-        }}
-        alt="Sample image"
-      />
-      <CldImage
-        src="cld-sample-5"
-        width="200"
-        height="200"
-        crop={{
-          type: 'auto',
-          source: true,
-        }}
-        alt="Sample image"
-      />
-      <CldImage
-        src="cld-sample-5"
-        width="200"
-        height="200"
-        crop={{
-          type: 'auto',
-          source: true,
-        }}
-        alt="Sample image"
-      />
-      <CldImage
-        src="cld-sample-5"
-        width="200"
-        height="200"
-        crop={{
-          type: 'auto',
-          source: true,
-        }}
-        alt="Sample image"
-      />
+    <div className="flex gap-2 flex-row flex-wrap">
+      {media.map((asset) =>
+        asset.resource_type === 'image' ? (
+          <CldImage
+            key={asset.public_id}
+            src={asset.public_id}
+            width="300"
+            height="200"
+            alt={asset.public_id}
+          />
+        ) : (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            width={300}
+            height={200}
+            key={asset.public_id}
+          >
+            <source
+              src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload/q_auto,f_auto/${asset.public_id}.mp4`}
+              type="video/mp4"
+            />
+          </video>
+        )
+      )}
     </div>
   )
 }

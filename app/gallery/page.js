@@ -1,4 +1,5 @@
 import Footer from '../_components/Footer'
+import MenuCircle from '../_components/MenuCircle'
 import GalleryGrid from './GalleryGrid'
 
 async function page() {
@@ -6,7 +7,6 @@ async function page() {
     cache: 'no-store',
   })
   const media = await res.json()
-  console.log(media)
 
   return (
     <div className="font-sans grid grid-rows-[auto_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
@@ -14,6 +14,7 @@ async function page() {
         <GalleryGrid media={media} />
       </div>
       <Footer />
+      <MenuCircle />
     </div>
   )
 }
