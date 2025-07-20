@@ -1,15 +1,26 @@
 'use client'
-import { useRef } from 'react'
+
+import { useEffect, useRef } from 'react'
 import { useModal } from '../context/MenuContext'
 import { useClickOutside } from '../hooks/useClickOutside'
-import { HiOutlineHome, HiOutlinePhone } from 'react-icons/hi'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 function MenuModal() {
+  const pathname = usePathname()
   const { isOpen, toggleMenu } = useModal()
   const modalRef = useRef()
+
   useClickOutside(modalRef, () => {
     if (isOpen) toggleMenu()
   })
+
+  useEffect(() => {
+    if (pathname === '/' && isOpen) {
+      toggleMenu()
+    }
+  }, [pathname, isOpen, toggleMenu])
+
   if (!isOpen) return null
 
   return (
@@ -18,14 +29,11 @@ function MenuModal() {
       ref={modalRef}
     >
       <ul className="p-4">
-        <li className="hover:bg-gray-500/20 rounded-sm p-1 hover:cursor-pointer">
-          Home
+        <li className="hover:bg-gray-500/20 rounded-sm p-1 hover:cursor-pointer border-b-1 border-gray-500/20">
+          <Link href="/">Home</Link>
         </li>
         <li className="hover:bg-gray-500/20 rounded-sm p-1 hover:cursor-pointer">
           Contact
-        </li>
-        <li className="hover:bg-gray-500/20 rounded-sm p-1 hover:cursor-pointer">
-          About
         </li>
       </ul>
       <code className="text-xs border-t-2 border-gray-500/20 p-2 rounded-xl">

@@ -8,7 +8,10 @@ function MenuCircle() {
 
   return (
     <button
-      onClick={() => toggleMenu()}
+      onClick={(e) => {
+        e.stopPropagation()
+        toggleMenu()
+      }}
       className="fixed bottom-4 right-8 z-50 hover:cursor-pointer"
     >
       <div className="relative w-12 h-12 rounded-full p-[2px] bg-gradient-to-br from-white/20 via-gray-300/20 to-transparent">
