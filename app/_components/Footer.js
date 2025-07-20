@@ -1,7 +1,13 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import MenuCircle from './MenuCircle'
+import { usePathname } from 'next/navigation'
 
 function Footer() {
+  const pathname = usePathname()
+
   return (
     <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
       <Link
@@ -46,6 +52,7 @@ function Footer() {
         />
         Go to our instagram →
       </Link>
+      {pathname !== '/' && <MenuCircle />}
     </footer>
   )
 }

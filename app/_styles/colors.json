@@ -1,0 +1,6 @@
+colors: {
+    primary: {
+        background: '#0a0a0a'
+        modal-background: '#0a0a0a'
+    }
+}

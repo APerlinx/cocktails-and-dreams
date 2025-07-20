@@ -1,9 +1,16 @@
+'use client'
+
 import Image from 'next/image'
-import Link from 'next/link'
+import { useModal } from '../context/MenuContext'
 
 function MenuCircle() {
+  const { toggleMenu } = useModal()
+
   return (
-    <Link href="/" className="fixed bottom-4 right-8 z-50">
+    <button
+      onClick={() => toggleMenu()}
+      className="fixed bottom-4 right-8 z-50 hover:cursor-pointer"
+    >
       <div className="relative w-12 h-12 rounded-full p-[2px] bg-gradient-to-br from-white/20 via-gray-300/20 to-transparent">
         <div className="w-full h-full rounded-full overflow-hidden bg-black  hover:bg-gray-500/10 duration-300">
           <Image
@@ -15,7 +22,7 @@ function MenuCircle() {
           />
         </div>
       </div>
-    </Link>
+    </button>
   )
 }
 

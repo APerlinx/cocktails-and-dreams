@@ -1,5 +1,4 @@
 import Footer from '../_components/Footer'
-import MenuCircle from '../_components/MenuCircle'
 import GalleryGrid from './GalleryGrid'
 
 async function page() {
@@ -14,7 +13,6 @@ async function page() {
         <GalleryGrid media={media} />
       </div>
       <Footer />
-      <MenuCircle />
     </div>
   )
 }
