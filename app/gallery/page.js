@@ -4,7 +4,7 @@ import GalleryGrid from './GalleryGrid'
 
 async function page() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/gallery`, {
-    cache: 'no-store',
+    next: { revalidate: 3600 },
   })
   const media = await res.json()
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useModal } from '../context/MenuContext'
 import { useClickOutside } from '../hooks/useClickOutside'
 import Link from 'next/link'
@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation'
 
 function MenuModal() {
   const pathname = usePathname()
+  const [prevPath, setPrevPath] = useState('')
   const { isOpen, toggleMenu } = useModal()
   const modalRef = useRef()
 
@@ -16,10 +17,11 @@ function MenuModal() {
   })
 
   useEffect(() => {
-    if (pathname === '/' && isOpen) {
+    if (pathname !== prevPath && isOpen) {
       toggleMenu()
     }
-  }, [pathname, isOpen, toggleMenu])
+    setPrevPath(pathname)
+  }, [pathname, isOpen, toggleMenu, prevPath])
 
   if (!isOpen) return null
 
@@ -33,7 +35,10 @@ function MenuModal() {
           <Link href="/">Home</Link>
         </li>
         <li className="hover:bg-gray-500/20 rounded-sm p-1 hover:cursor-pointer">
-          Contact
+          <Link href="/contact">Contact</Link>
+        </li>
+        <li className="hover:bg-gray-500/20 rounded-sm p-1 hover:cursor-pointer">
+          <Link href="/gallery">Gallery</Link>
         </li>
       </ul>
       <code className="text-xs border-t-2 border-gray-500/20 p-2 rounded-xl">

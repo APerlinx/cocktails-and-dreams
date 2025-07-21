@@ -3,6 +3,7 @@ colors: {
         background: '#0a0a0a'
         modal-background: '#0a0a0a'
         svg-color: '#f7f7f7'
+        about-me: '#f7f7f7'
 
     }
 }

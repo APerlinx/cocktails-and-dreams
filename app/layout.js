@@ -1,5 +1,5 @@
 import { Geist, Geist_Mono } from 'next/font/google'
-import './globals.css'
+import './_styles/globals.css'
 import { MenuProvider } from './context/MenuContext'
 import MenuModal from './_components/MenuModal'
 
