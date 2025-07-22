@@ -27,7 +27,7 @@ function MenuModal() {
 
   return (
     <div
-      className="bg-[#0a0a0a] border-2 border-gray-500/20 rounded-xl fixed bottom-17 right-8 text-center"
+      className="bg-[#171717] border-2 border-gray-500/20 rounded-xl fixed bottom-17 right-8 text-center"
       ref={modalRef}
     >
       <ul className="p-4">
