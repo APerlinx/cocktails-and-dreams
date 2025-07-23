@@ -40,6 +40,9 @@ const MenuModal: FC = () => {
         <li className="hover:bg-gray-500/20 rounded-sm p-1 hover:cursor-pointer">
           <Link href="/gallery">Gallery</Link>
         </li>
+        <li className="hover:bg-gray-500/20 rounded-sm p-1 hover:cursor-pointer">
+          <Link href="/about">About</Link>
+        </li>
       </ul>
       <code className="text-xs border-t-2 border-gray-500/20 p-2 rounded-xl">
         Website and desgin by Alon Perlin

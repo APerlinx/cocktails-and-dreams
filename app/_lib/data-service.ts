@@ -2,7 +2,13 @@ type CloudinaryMediaItem = {
   public_id: string
   filename: string
   resource_type?: string
-  [key: string]: any // ignore other keys for now
+  secure_url?: string
+  context?: {
+    custom?: {
+      [key: string]: string
+    }
+  }
+  [key: string]: any
 }
 
 type CloudinarySearchResponse = {
@@ -27,6 +33,7 @@ export async function getCloudinaryMedia(
       body: JSON.stringify({
         expression: `folder="${folderName}"`,
         max_results: 100,
+        with_field: 'context',
       }),
     }
   )
