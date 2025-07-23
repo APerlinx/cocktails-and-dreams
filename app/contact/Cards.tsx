@@ -18,6 +18,7 @@ import {
   Globe,
   Send,
   User,
+  Instagram,
 } from 'lucide-react'
 import Image from 'next/image'
 
@@ -27,7 +28,7 @@ export default function Cards() {
     phone: '0522484808',
     whatsapp: '0522484808',
     email: 'contact@yourbusiness.com',
-    address: '123 Business Street, City, State 12345',
+    instagram: '_cocktails.dreams',
     website: 'www.yourbusiness.com',
     businessHours: {
       weekdays: 'Monday - Friday: 9:00 AM - 6:00 PM',
@@ -52,9 +53,8 @@ export default function Cards() {
     window.open(`mailto:${contactInfo.email}`, '_self')
   }
 
-  const handleAddressClick = () => {
-    const encodedAddress = encodeURIComponent(contactInfo.address)
-    window.open(`https://maps.google.com?q=${encodedAddress}`, '_blank')
+  const handleInstagramClick = () => {
+    window.open(`https://instagram.com`, '_blank')
   }
 
   const handleWebsiteClick = () => {
@@ -62,7 +62,7 @@ export default function Cards() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-secondary/10">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Header */}
         <div className="text-center mb-4">
@@ -77,9 +77,9 @@ export default function Cards() {
         </div>
 
         {/* Business Name Card */}
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl flex justify-center">
-            <Image src="logo-text.svg" height={400} width={200} alt="logo" />
+        <CardHeader>
+          <CardTitle className="flex justify-center mt-[-30]">
+            <Image src="logo-text.svg" height={200} width={150} alt="logo" />
           </CardTitle>
         </CardHeader>
 
@@ -152,24 +152,26 @@ export default function Cards() {
             </CardContent>
           </Card>
 
-          {/* Address */}
+          {/* Instagram */}
           <Card className="hover:shadow-lg transition-shadow duration-200">
             <CardHeader>
               <div className="flex items-center gap-3">
-                <MapPin className="h-6 w-6 text-primary" />
-                <CardTitle>Address</CardTitle>
+                <Instagram className="h-6 w-6 text-primary" />
+                <CardTitle>Instagram</CardTitle>
               </div>
-              <CardDescription>Visit us at our location</CardDescription>
+              <CardDescription>
+                Just follow for updates or DM us
+              </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="mb-4">{contactInfo.address}</p>
+              <p className="mb-4">{contactInfo.instagram}</p>
               <Button
-                onClick={handleAddressClick}
+                onClick={handleInstagramClick}
                 variant="outline"
                 className="w-full"
               >
-                <MapPin className="h-4 w-4 mr-2" />
-                View on Map
+                <Instagram className="h-4 w-4 mr-2" />
+                Follow
               </Button>
             </CardContent>
           </Card>

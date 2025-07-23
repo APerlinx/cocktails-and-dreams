@@ -27,7 +27,7 @@ const MenuModal: FC = () => {
 
   return (
     <div
-      className="bg-[#171717] border-2 border-gray-500/20 rounded-xl fixed bottom-17 right-8 text-center"
+      className="bg-primary-foreground border-2 border-gray-500/20 rounded-xl fixed bottom-17 right-8 text-center"
       ref={modalRef}
     >
       <ul className="p-4">
