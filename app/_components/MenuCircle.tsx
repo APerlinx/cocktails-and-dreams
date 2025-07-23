@@ -1,9 +1,10 @@
 'use client'
 
 import Image from 'next/image'
+import { FC } from 'react'
 import { useModal } from '../context/MenuContext'
 
-function MenuCircle() {
+const MenuCircle: FC = () => {
   const { toggleMenu } = useModal()
 
   return (

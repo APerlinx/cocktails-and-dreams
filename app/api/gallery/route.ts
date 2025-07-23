@@ -1,6 +1,7 @@
 import { getCloudinaryMedia } from '../../_lib/data-service'
+import { NextRequest } from 'next/server'
 
-export async function GET(req) {
+export async function GET(req: NextRequest) {
   const folderName = 'gallery'
   try {
     const media = await getCloudinaryMedia(folderName)

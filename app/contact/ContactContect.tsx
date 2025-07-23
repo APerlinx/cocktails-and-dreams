@@ -1,12 +1,18 @@
 import Image from 'next/image'
 import ContactImages from './ContactImages'
 import Link from 'next/link'
+import { FC, ReactElement } from 'react'
 
-async function ContactContect() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/gallery`, {
-    next: { revalidate: 3600 },
-  })
-  const media = await res.json()
+type MediaItem = {
+  public_id: string
+  filename: string
+}
+
+type ContactContectProps = {
+  media: MediaItem[]
+}
+
+const ContactContect: FC<ContactContectProps> = ({ media }) => {
   return (
     <div className="grid grid-cols-2 mt-20">
       <ContactImages media={media} />

@@ -2,10 +2,11 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import MenuCircle from './MenuCircle'
 import { usePathname } from 'next/navigation'
+import { ReactElement } from 'react'
+import MenuCircle from './MenuCircle'
 
-function Footer() {
+function Footer(): ReactElement {
   const pathname = usePathname()
 
   return (

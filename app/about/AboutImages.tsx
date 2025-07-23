@@ -1,6 +1,7 @@
 'use client'
 
 import { CldImage } from 'next-cloudinary'
+import { FC } from 'react'
 
 type MediaItem = {
   public_id: string
@@ -11,8 +12,7 @@ type AboutImagesProps = {
   media: MediaItem[]
 }
 
-
-function AboutImages({ media } : AboutImagesProps) {
+const AboutImages: FC<AboutImagesProps> = ({ media }) => {
   const founderOne = media.find((item) => item.filename.includes('fssnkx'))
   const founderTwo = media.find(
     (item) => item.filename.includes('evbnub') && item !== founderOne

@@ -1,8 +1,9 @@
+import { ReactElement } from 'react'
 import Footer from '../_components/Footer'
 import Header from '../_components/Header'
 import AboutImages from './AboutImages'
 
-async function AboutPage() {
+async function AboutPage(): Promise<ReactElement> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/gallery`, {
     next: { revalidate: 3600 },
   })

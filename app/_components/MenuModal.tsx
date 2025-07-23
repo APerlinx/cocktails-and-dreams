@@ -1,12 +1,12 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import { useModal } from '../context/MenuContext'
-import { useClickOutside } from '../hooks/useClickOutside'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { FC, useEffect, useRef, useState } from 'react'
+import { useModal } from '../context/MenuContext'
+import { useClickOutside } from '../hooks/useClickOutside'
 
-function MenuModal() {
+const MenuModal: FC = () => {
   const pathname = usePathname()
   const [prevPath, setPrevPath] = useState('')
   const { isOpen, toggleMenu } = useModal()
