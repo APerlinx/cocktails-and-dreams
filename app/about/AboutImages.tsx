@@ -2,7 +2,17 @@
 
 import { CldImage } from 'next-cloudinary'
 
-function AboutImages({ media }) {
+type MediaItem = {
+  public_id: string
+  filename: string
+}
+
+type AboutImagesProps = {
+  media: MediaItem[]
+}
+
+
+function AboutImages({ media } : AboutImagesProps) {
   const founderOne = media.find((item) => item.filename.includes('fssnkx'))
   const founderTwo = media.find(
     (item) => item.filename.includes('evbnub') && item !== founderOne

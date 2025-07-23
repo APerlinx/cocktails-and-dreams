@@ -1,4 +1,4 @@
-import { getCloudinaryMedia } from '@/app/_lib/data-service'
+import { getCloudinaryMedia } from '../../_lib/data-service'
 
 export async function GET(req) {
   const folderName = 'gallery'
