@@ -10,7 +10,7 @@ function MenuModal() {
   const pathname = usePathname()
   const [prevPath, setPrevPath] = useState('')
   const { isOpen, toggleMenu } = useModal()
-  const modalRef = useRef()
+  const modalRef = useRef<HTMLDivElement>(null)
 
   useClickOutside(modalRef, () => {
     if (isOpen) toggleMenu()

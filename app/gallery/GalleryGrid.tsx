@@ -1,7 +1,18 @@
 'use client'
 import { CldImage } from 'next-cloudinary'
 
-export default function GalleryGrid({ media }) {
+type MediaAsset = {
+  public_id: string
+  resource_type: 'image' | 'video'
+  filename: string
+  secure_url?: string
+}
+
+type GalleryGridProps = {
+  media: MediaAsset[]
+}
+
+export default function GalleryGrid({ media }: GalleryGridProps) {
   return (
     <>
       <h1 className="text-3xl font-bold mb-8 mt-2 text-center">Gallery</h1>
