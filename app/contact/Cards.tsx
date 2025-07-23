@@ -1,0 +1,253 @@
+'use client'
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../_components/ContactUi/card'
+import { Button } from '../_components/ContactUi/button'
+import { Separator } from '../_components/ContactUi/separator'
+import {
+  Phone,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Clock,
+  Globe,
+  Send,
+  User,
+} from 'lucide-react'
+import Image from 'next/image'
+
+export default function Cards() {
+  const contactInfo = {
+    name: 'Cocktails and Dreams',
+    phone: '0522484808',
+    whatsapp: '0522484808',
+    email: 'contact@yourbusiness.com',
+    address: '123 Business Street, City, State 12345',
+    website: 'www.yourbusiness.com',
+    businessHours: {
+      weekdays: 'Monday - Friday: 9:00 AM - 6:00 PM',
+      weekends: 'Saturday - Sunday: 10:00 AM - 4:00 PM',
+    },
+  }
+
+  const handlePhoneClick = () => {
+    window.open(`tel:${contactInfo.phone}`, '_self')
+  }
+
+  const handleWhatsAppClick = () => {
+    const message = "Hello, I'm interested in your services."
+    const whatsappNumber = contactInfo.whatsapp.replace(/\D/g, '')
+    window.open(
+      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
+      '_blank'
+    )
+  }
+
+  const handleEmailClick = () => {
+    window.open(`mailto:${contactInfo.email}`, '_self')
+  }
+
+  const handleAddressClick = () => {
+    const encodedAddress = encodeURIComponent(contactInfo.address)
+    window.open(`https://maps.google.com?q=${encodedAddress}`, '_blank')
+  }
+
+  const handleWebsiteClick = () => {
+    window.open(`https://${contactInfo.website}`, '_blank')
+  }
+
+  return (
+    <div className="min-h-screen bg-background">
+      <div className="container mx-auto px-4 py-8 max-w-4xl">
+        {/* Header */}
+        <div className="text-center mb-4">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <User className="h-8 w-8 text-primary" />
+            <h1 className="text-4xl">Contact Us</h1>
+          </div>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Get in touch with us today. We&apos;re here to help and answer any
+            questions you might have.
+          </p>
+        </div>
+
+        {/* Business Name Card */}
+        <CardHeader className="text-center">
+          <CardTitle className="text-2xl flex justify-center">
+            <Image src="logo-text.svg" height={400} width={200} alt="logo" />
+          </CardTitle>
+        </CardHeader>
+
+        {/* Contact Methods Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          {/* Phone */}
+          <Card className="hover:shadow-lg transition-shadow duration-200">
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <Phone className="h-6 w-6 text-primary" />
+                <CardTitle>Phone</CardTitle>
+              </div>
+              <CardDescription>
+                Call us directly for immediate assistance
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="mb-4">{contactInfo.phone}</p>
+              <Button onClick={handlePhoneClick} className="w-full">
+                <Phone className="h-4 w-4 mr-2" />
+                Call Now
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* WhatsApp */}
+          <Card className="hover:shadow-lg transition-shadow duration-200">
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <MessageCircle className="h-6 w-6 text-primary" />
+                <CardTitle>WhatsApp</CardTitle>
+              </div>
+              <CardDescription>
+                Message us on WhatsApp for quick responses
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="mb-4">{contactInfo.whatsapp}</p>
+              <Button
+                onClick={handleWhatsAppClick}
+                className="w-full bg-green-600 hover:bg-green-700"
+              >
+                <MessageCircle className="h-4 w-4 mr-2" />
+                Message on WhatsApp
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Email */}
+          <Card className="hover:shadow-lg transition-shadow duration-200">
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <Mail className="h-6 w-6 text-primary" />
+                <CardTitle>Email</CardTitle>
+              </div>
+              <CardDescription>
+                Send us an email for detailed inquiries
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="mb-4">{contactInfo.email}</p>
+              <Button
+                onClick={handleEmailClick}
+                variant="outline"
+                className="w-full"
+              >
+                <Send className="h-4 w-4 mr-2" />
+                Send Email
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Address */}
+          <Card className="hover:shadow-lg transition-shadow duration-200">
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <MapPin className="h-6 w-6 text-primary" />
+                <CardTitle>Address</CardTitle>
+              </div>
+              <CardDescription>Visit us at our location</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="mb-4">{contactInfo.address}</p>
+              <Button
+                onClick={handleAddressClick}
+                variant="outline"
+                className="w-full"
+              >
+                <MapPin className="h-4 w-4 mr-2" />
+                View on Map
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Additional Information */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Business Hours */}
+          <Card>
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <Clock className="h-6 w-6 text-primary" />
+                <CardTitle>Business Hours</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              <div>
+                <p className="text-sm text-muted-foreground">Weekdays</p>
+                <p>{contactInfo.businessHours.weekdays}</p>
+              </div>
+              <Separator />
+              <div>
+                <p className="text-sm text-muted-foreground">Weekends</p>
+                <p>{contactInfo.businessHours.weekends}</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Website */}
+          <Card>
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <Globe className="h-6 w-6 text-primary" />
+                <CardTitle>Website</CardTitle>
+              </div>
+              <CardDescription>
+                Visit our website for more information
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="mb-4">{contactInfo.website}</p>
+              <Button
+                onClick={handleWebsiteClick}
+                variant="outline"
+                className="w-full"
+              >
+                <Globe className="h-4 w-4 mr-2" />
+                Visit Website
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Footer Message */}
+        <Card className="mt-8">
+          <CardContent className="text-center py-8">
+            <h3 className="mb-2">Ready to get started?</h3>
+            <p className="text-muted-foreground mb-6">
+              Choose your preferred method of contact above and we&apos;ll get
+              back to you as soon as possible.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button onClick={handlePhoneClick} size="lg">
+                <Phone className="h-4 w-4 mr-2" />
+                Call Now
+              </Button>
+              <Button
+                onClick={handleWhatsAppClick}
+                size="lg"
+                className="bg-green-600 hover:bg-green-700"
+              >
+                <MessageCircle className="h-4 w-4 mr-2" />
+                WhatsApp
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  )
+}
