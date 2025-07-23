@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import './_styles/globals.css'
 import { ModalProvider } from './context/MenuContext'
 import MenuModal from './_components/MenuModal'
+import { ReactNode } from 'react'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -18,7 +19,11 @@ export const metadata = {
   description: 'Cocktail and dreams website',
 }
 
-export default function RootLayout({ children }) {
+type RootLayoutProps = {
+  children: ReactNode
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body

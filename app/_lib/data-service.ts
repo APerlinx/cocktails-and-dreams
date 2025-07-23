@@ -1,4 +1,17 @@
-export async function getCloudinaryMedia(folderName) {
+type CloudinaryMediaItem = {
+  public_id: string
+  filename: string
+  resource_type?: string
+  [key: string]: any // ignore other keys for now
+}
+
+type CloudinarySearchResponse = {
+  resources: CloudinaryMediaItem[]
+}
+
+export async function getCloudinaryMedia(
+  folderName: string
+): Promise<CloudinaryMediaItem[]> {
   const res = await fetch(
     `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/resources/search`,
     {
@@ -19,6 +32,7 @@ export async function getCloudinaryMedia(folderName) {
   )
 
   if (!res.ok) throw new Error('Failed to fetch Cloudinary media')
-  const data = await res.json()
+
+  const data: CloudinarySearchResponse = await res.json()
   return data.resources
 }
