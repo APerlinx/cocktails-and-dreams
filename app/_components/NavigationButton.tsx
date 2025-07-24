@@ -29,7 +29,7 @@ export default function NavigateButton({
       onClick={handleClick}
       disabled={isLoading}
       className={clsx(
-        'rounded-full transition-colors flex items-center justify-center gap-2 font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto disabled:opacity-70',
+        'rounded-full cursor-pointer transition-colors flex items-center justify-center gap-2 font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto disabled:opacity-70',
         className
       )}
     >

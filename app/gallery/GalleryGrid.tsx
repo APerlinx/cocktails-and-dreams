@@ -41,7 +41,7 @@ export default function GalleryGrid({ media }: GalleryGridProps) {
       ...new Set(
         media
           .map((item) => item.context?.event_type)
-          .filter((eventType): eventType is string => Boolean(eventType)) // <- filter out undefined
+          .filter((eventType): eventType is string => Boolean(eventType))
       ),
     ].sort()
   }, [media])
@@ -102,8 +102,8 @@ export default function GalleryGrid({ media }: GalleryGridProps) {
               <h1 className="text-5xl">Event Gallery</h1>
             </div>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Relive the best moments from our events. From electrifying DJ
-              nights to intimate cocktail tastings, explore the energy and
+              Relive the best moments from our events. From electrifying
+              festivals to intimate cocktail tastings, explore the energy and
               excitement that makes Cocktails&Dreams unforgettable.
             </p>
           </div>

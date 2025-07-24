@@ -1,26 +1,24 @@
 'use client'
 
 import {
+  Award,
+  CalendarHeart,
+  Clock,
+  Heart,
+  Martini,
+  Star,
+  Users,
+  Zap,
+} from 'lucide-react'
+import { CldImage } from 'next-cloudinary'
+import { Badge } from '../_components/AboutUI/badge'
+import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from '../_components/AboutUI/card'
-import { Badge } from '../_components/AboutUI/badge'
-import { Separator } from '../_components/AboutUI/separator'
-import { ImageWithFallback } from '../_components/AboutUI/fallback/ImageWithFallback'
-import {
-  Users,
-  Heart,
-  Award,
-  Clock,
-  Zap,
-  Star,
-  Martini,
-  CalendarHeart,
-} from 'lucide-react'
-import { CldImage } from 'next-cloudinary'
 
 type MediaItem = {
   public_id: string
