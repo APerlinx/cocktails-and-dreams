@@ -37,11 +37,23 @@ export default function GalleryGrid({ media }: GalleryGridProps) {
   const [selectedYear, setSelectedYear] = useState<string | null>(null)
 
   const eventTypes = useMemo(() => {
-    return [...new Set(media.map((item) => item.context?.event_type))].sort()
+    return [
+      ...new Set(
+        media
+          .map((item) => item.context?.event_type)
+          .filter((eventType): eventType is string => Boolean(eventType)) // <- filter out undefined
+      ),
+    ].sort()
   }, [media])
 
   const years = useMemo(() => {
-    return [...new Set(media.map((item) => item.context?.year))]
+    return [
+      ...new Set(
+        media
+          .map((item) => item.context?.year)
+          .filter((year): year is string => Boolean(year))
+      ),
+    ]
       .sort()
       .reverse()
   }, [media])
@@ -152,8 +164,8 @@ export default function GalleryGrid({ media }: GalleryGridProps) {
             onEventTypeChange={setSelectedEventType}
             onMediaTypeChange={setSelectedMediaType}
             onYearChange={setSelectedYear}
-            eventTypes={eventTypes}
-            years={years}
+            eventTypes={eventTypes || ''}
+            years={years || ''}
             totalItems={media.length}
             filteredItems={filteredItems.length}
           />
@@ -171,7 +183,7 @@ export default function GalleryGrid({ media }: GalleryGridProps) {
                     id={item.public_id}
                     type={item.resource_type}
                     src={item.public_id}
-                    videoSrc={item.url}
+                    videoSrc={(item.url || '') as string}
                     title={context.title || item.filename}
                     eventType={context.event_type || ''}
                     date={context.date || ''}

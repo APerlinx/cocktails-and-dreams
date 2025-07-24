@@ -34,7 +34,7 @@ type AboutImagesProps = {
 export default function Content({ media }: AboutImagesProps) {
   const founderOne = media.find((item) => item.filename.includes('fssnkx'))
   const founderTwo = media.find((item) => item.filename.includes('evbnub'))
-  const mainImage = media.find((item) => item.filename.includes('eqw8cl'))
+  const mainImage = media.find((item) => item.filename.includes('q37pld'))
 
   const stats = [
     { label: 'Years in Business', value: '5+', icon: Clock },

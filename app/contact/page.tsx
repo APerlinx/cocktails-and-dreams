@@ -4,7 +4,7 @@ import Cards from './Cards'
 
 function page() {
   return (
-    <div className="min-h-screen p-8 grid gap-12">
+    <div className="min-h-screen pb-8 grid gap-12">
       <Header />
       <section>
         <Cards />

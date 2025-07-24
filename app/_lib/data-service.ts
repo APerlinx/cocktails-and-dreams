@@ -4,9 +4,7 @@ type CloudinaryMediaItem = {
   resource_type?: string
   secure_url?: string
   context?: {
-    custom?: {
-      [key: string]: string
-    }
+    [key: string]: string
   }
   [key: string]: any
 }
