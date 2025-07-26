@@ -19,20 +19,21 @@ import {
   Send,
   User,
   Instagram,
+  Facebook,
 } from 'lucide-react'
 import Image from 'next/image'
 
 export default function Cards() {
   const contactInfo = {
     name: 'Cocktails and Dreams',
-    phone: '0522484808',
-    whatsapp: '0522484808',
-    email: 'contact@yourbusiness.com',
-    instagram: '_cocktails.dreams',
-    website: 'www.yourbusiness.com',
+    phone: '054-493-0095',
+    whatsapp: '+972 54-493-0095',
+    email: 'idanherman@gmail.com',
+    instagram: 'cocktail.dreams_',
+    facebook: 'facebooklink.com',
     businessHours: {
-      weekdays: 'Monday - Friday: 9:00 AM - 6:00 PM',
-      weekends: 'Saturday - Sunday: 10:00 AM - 4:00 PM',
+      weekdays: 'Sunday - Friday: 9:00 AM - 6:00 PM',
+      weekends: 'Friday - Saturday: 10:00 AM - 4:00 PM',
     },
   }
 
@@ -58,7 +59,7 @@ export default function Cards() {
   }
 
   const handleWebsiteClick = () => {
-    window.open(`https://${contactInfo.website}`, '_blank')
+    window.open(`https://${contactInfo.facebook}`, '_blank')
   }
 
   return (
@@ -204,22 +205,20 @@ export default function Cards() {
           <Card>
             <CardHeader>
               <div className="flex items-center gap-3">
-                <Globe className="h-6 w-6 text-primary" />
-                <CardTitle>Website</CardTitle>
+                <Facebook className="h-6 w-6 text-primary" />
+                <CardTitle>Facebook</CardTitle>
               </div>
-              <CardDescription>
-                Visit our website for more information
-              </CardDescription>
+              <CardDescription>Visit our facebook profile</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="mb-4">{contactInfo.website}</p>
+              <p className="mb-4">{contactInfo.facebook}</p>
               <Button
                 onClick={handleWebsiteClick}
                 variant="outline"
                 className="w-full"
               >
-                <Globe className="h-4 w-4 mr-2" />
-                Visit Website
+                <Facebook className="h-4 w-4 mr-2" />
+                Visit facebook
               </Button>
             </CardContent>
           </Card>
