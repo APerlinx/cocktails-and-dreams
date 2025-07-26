@@ -51,7 +51,7 @@ function Footer(): ReactElement {
 
         const commonClass = `flex items-center gap-2 hover:underline hover:underline-offset-4 transition-opacity ${
           isLoading ? 'opacity-50 pointer-events-none' : ''
-        }`
+        } ${pathname === href ? 'underline underline-offset-4' : ''}`
 
         const iconSrc = `/${icon}${isHome ? '' : '-dark'}.svg`
 

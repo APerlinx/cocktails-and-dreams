@@ -110,28 +110,28 @@ export default function GalleryGrid({ media }: GalleryGridProps) {
 
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Card className="text-center">
+            <Card className="text-center bg-card-1">
               <CardContent className="pt-4">
                 <Zap className="h-6 w-6 text-primary mx-auto mb-2" />
                 <div className="text-2xl">{stats.totalEvents}</div>
                 <p className="text-sm text-muted-foreground">Event Types</p>
               </CardContent>
             </Card>
-            <Card className="text-center">
+            <Card className="text-center bg-card-2">
               <CardContent className="pt-4">
                 <Camera className="h-6 w-6 text-primary mx-auto mb-2" />
                 <div className="text-2xl">{stats.totalPhotos}</div>
                 <p className="text-sm text-muted-foreground">Photos</p>
               </CardContent>
             </Card>
-            <Card className="text-center">
+            <Card className="text-center bg-card-3 ">
               <CardContent className="pt-4">
                 <Video className="h-6 w-6 text-primary mx-auto mb-2" />
                 <div className="text-2xl">{stats.totalVideos}</div>
                 <p className="text-sm text-muted-foreground">Videos</p>
               </CardContent>
             </Card>
-            <Card className="text-center">
+            <Card className="text-center bg-card-4">
               <CardContent className="pt-4">
                 <Users className="h-6 w-6 text-primary mx-auto mb-2" />
                 <div className="text-2xl">13,602</div>
@@ -220,7 +220,7 @@ export default function GalleryGrid({ media }: GalleryGridProps) {
                 #Cocktails&Dreams
               </Badge>
               <Badge variant="outline" className="text-sm px-4 py-2">
-                @_cocktails.dreams
+                @cocktail.dreams_
               </Badge>
               <Badge variant="outline" className="text-sm px-4 py-2">
                 #Cocktails&Dreams

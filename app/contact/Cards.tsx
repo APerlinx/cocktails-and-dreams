@@ -1,27 +1,25 @@
 'use client'
 
 import {
+  Clock,
+  Facebook,
+  Instagram,
+  Mail,
+  MessageCircle,
+  Phone,
+  Send,
+  User,
+} from 'lucide-react'
+import Image from 'next/image'
+import { Button } from '../_components/ContactUi/button'
+import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from '../_components/ContactUi/card'
-import { Button } from '../_components/ContactUi/button'
 import { Separator } from '../_components/ContactUi/separator'
-import {
-  Phone,
-  Mail,
-  MapPin,
-  MessageCircle,
-  Clock,
-  Globe,
-  Send,
-  User,
-  Instagram,
-  Facebook,
-} from 'lucide-react'
-import Image from 'next/image'
 
 export default function Cards() {
   const contactInfo = {
@@ -63,10 +61,10 @@ export default function Cards() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-secondary/10">
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-secondary/10 cursor-default">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Header */}
-        <div className="text-center mb-4">
+        <div className="text-center mb-4 mt-8">
           <div className="flex items-center justify-center gap-3 mb-4">
             <User className="h-8 w-8 text-primary" />
             <h1 className="text-4xl">Contact Us</h1>
@@ -99,7 +97,7 @@ export default function Cards() {
             </CardHeader>
             <CardContent>
               <p className="mb-4">{contactInfo.phone}</p>
-              <Button onClick={handlePhoneClick} className="w-full">
+              <Button onClick={handlePhoneClick} className="w-full ">
                 <Phone className="h-4 w-4 mr-2" />
                 Call Now
               </Button>
@@ -121,7 +119,7 @@ export default function Cards() {
               <p className="mb-4">{contactInfo.whatsapp}</p>
               <Button
                 onClick={handleWhatsAppClick}
-                className="w-full bg-green-600 hover:bg-green-700"
+                className="w-full bg-whatsapp-card hover:bg-whatsapp-card-hover "
               >
                 <MessageCircle className="h-4 w-4 mr-2" />
                 Message on WhatsApp
@@ -168,8 +166,7 @@ export default function Cards() {
               <p className="mb-4">{contactInfo.instagram}</p>
               <Button
                 onClick={handleInstagramClick}
-                variant="outline"
-                className="w-full"
+                className="w-full bg-instagram-card hover:bg-instagram-card-hover"
               >
                 <Instagram className="h-4 w-4 mr-2" />
                 Follow
@@ -201,8 +198,8 @@ export default function Cards() {
             </CardContent>
           </Card>
 
-          {/* Website */}
-          <Card>
+          {/* Facebook */}
+          <Card className="hover:shadow-lg transition-shadow duration-200">
             <CardHeader>
               <div className="flex items-center gap-3">
                 <Facebook className="h-6 w-6 text-primary" />
@@ -214,8 +211,7 @@ export default function Cards() {
               <p className="mb-4">{contactInfo.facebook}</p>
               <Button
                 onClick={handleWebsiteClick}
-                variant="outline"
-                className="w-full"
+                className="w-full bg-facebook-card hover:bg-facebook-card-hover"
               >
                 <Facebook className="h-4 w-4 mr-2" />
                 Visit facebook
@@ -240,7 +236,7 @@ export default function Cards() {
               <Button
                 onClick={handleWhatsAppClick}
                 size="lg"
-                className="bg-green-600 hover:bg-green-700"
+                className="bg-whatsapp-card hover:bg-whatsapp-card-hover"
               >
                 <MessageCircle className="h-4 w-4 mr-2" />
                 WhatsApp

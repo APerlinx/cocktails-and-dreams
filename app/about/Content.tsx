@@ -47,29 +47,33 @@ export default function Content({ media }: AboutImagesProps) {
       title: 'Passion for Excellence',
       description:
         'Every drink is crafted with dedication and attention to detail that shows in every sip.',
+      color: 'bg-card-1',
     },
     {
       icon: Users,
       title: 'Community First',
       description:
         'We believe in creating connections and bringing people together in a welcoming atmosphere.',
+      color: 'bg-card-2',
     },
     {
       icon: Zap,
       title: 'Innovation & Tradition',
       description:
         'We blend classic techniques with modern creativity to deliver unique experiences.',
+      color: 'bg-card-3',
     },
     {
       icon: Award,
       title: 'Quality Standards',
       description:
         'From ingredients to service, we maintain the highest standards in everything we do.',
+      color: 'bg-card-4',
     },
   ]
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background cursor-default">
       {/* Hero Section */}
       <div className="relative bg-gradient-to-br from-primary/5 via-background to-secondary/10">
         <div className="container mx-auto px-4 py-16 max-w-6xl">
@@ -118,7 +122,7 @@ export default function Content({ media }: AboutImagesProps) {
               </div>
               <CardContent className="p-8 flex flex-col justify-center">
                 <h2 className="text-3xl mb-4">Our Journey</h2>
-                <p className="text-muted-foreground mb-4 leading-relaxed">
+                <p className="text-muted-foreground mb-4 leading-relaxed ">
                   Cocktails&Dreams was born from a shared passion for mixology
                   and unforgettable nights. What began as a simple idea between
                   two friends is now a fully mobile bar experience that brings
@@ -218,7 +222,7 @@ export default function Content({ media }: AboutImagesProps) {
             {values.map((value, index) => (
               <Card
                 key={index}
-                className="hover:shadow-lg transition-shadow duration-200"
+                className={`hover:shadow-lg transition-shadow duration-200 ${value.color}`}
               >
                 <CardHeader>
                   <div className="flex items-center gap-3 mb-2">
