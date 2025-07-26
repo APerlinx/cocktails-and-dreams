@@ -8,6 +8,10 @@ async function page() {
   })
   const media = await res.json()
 
+  media.sort((a: any, b: any) => {
+    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+  })
+
   return (
     <div className="min-h-screen pb-8 grid gap-12">
       <Header />
