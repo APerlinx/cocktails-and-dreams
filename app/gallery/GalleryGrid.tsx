@@ -1,14 +1,15 @@
 'use client'
 
-import { useState, useMemo } from 'react'
-import { MediaItem } from '../_components/MediaItem'
+import { Camera, Search, Users, Video, Zap } from 'lucide-react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { GalleryFilters } from '../_components/GalleryFilters'
-import { Card, CardContent } from '../_components/GalleryUI//card'
 import { Badge } from '../_components/GalleryUI//badge'
+import { Card, CardContent } from '../_components/GalleryUI//card'
 import { Input } from '../_components/GalleryUI//input'
-import { Search, Camera, Video, Calendar, Users, Zap } from 'lucide-react'
+import { MediaItem } from '../_components/MediaItem'
+import SpinnerMini from '../_components/SpinnerMini'
 
-type MediaAsset = {
+export type MediaAsset = {
   public_id: string
   resource_type: 'image' | 'video'
   filename: string
@@ -22,11 +23,7 @@ type MediaAsset = {
   }
 }
 
-type GalleryGridProps = {
-  media: MediaAsset[]
-}
-
-export default function GalleryGrid({ media }: GalleryGridProps) {
+export default function GalleryGrid() {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedEventType, setSelectedEventType] = useState<string | null>(
     null
@@ -35,31 +32,84 @@ export default function GalleryGrid({ media }: GalleryGridProps) {
     null
   )
   const [selectedYear, setSelectedYear] = useState<string | null>(null)
+  const [items, setItems] = useState<MediaAsset[]>([])
+  const [cursor, setCursor] = useState<string | null>(null)
+  const [hasMore, setHasMore] = useState(true)
+  const [loading, setLoading] = useState(false)
+  const [hasTriggered, setHasTriggered] = useState(false)
+
+  const fetchMore = useCallback(async () => {
+    if (loading || !hasMore) return
+
+    setLoading(true)
+    try {
+      const res = await fetch(
+        `/api/cloudinary?folder=gallery&max=8${
+          cursor ? `&nextCursor=${cursor}` : ''
+        }`
+      )
+      const data = await res.json()
+
+      setItems((prev) => [...prev, ...data.items])
+      setCursor(data.nextCursor)
+      setHasMore(data.hasMore)
+    } catch (err) {
+      console.error('Failed to fetch media:', err)
+    } finally {
+      setLoading(false)
+      setHasTriggered(false)
+    }
+  }, [cursor, hasMore, loading])
+
+  const observerRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    if (!observerRef.current || !hasMore || loading || hasTriggered) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries
+        if (entry.isIntersecting) {
+          setHasTriggered(true)
+          fetchMore()
+        }
+      },
+      { rootMargin: '200px' }
+    )
+
+    const target = observerRef.current // ✅ Capture the ref value
+
+    if (target) observer.observe(target)
+
+    return () => {
+      if (target) observer.unobserve(target) // ✅ Use the captured value
+    }
+  }, [loading, hasMore, fetchMore, hasTriggered])
 
   const eventTypes = useMemo(() => {
     return [
       ...new Set(
-        media
+        items
           .map((item) => item.context?.event_type)
           .filter((eventType): eventType is string => Boolean(eventType))
       ),
     ].sort()
-  }, [media])
+  }, [items])
 
   const years = useMemo(() => {
     return [
       ...new Set(
-        media
+        items
           .map((item) => item.context?.year)
           .filter((year): year is string => Boolean(year))
       ),
     ]
       .sort()
       .reverse()
-  }, [media])
+  }, [items])
 
   const filteredItems = useMemo(() => {
-    return media.filter((item) => {
+    return items.filter((item) => {
       const context = item.context || {}
 
       const title = context.title?.toLowerCase() || ''
@@ -83,12 +133,12 @@ export default function GalleryGrid({ media }: GalleryGridProps) {
         matchesSearch && matchesEventType && matchesMediaType && matchesYear
       )
     })
-  }, [searchQuery, selectedEventType, selectedMediaType, selectedYear, media])
+  }, [searchQuery, selectedEventType, selectedMediaType, selectedYear, items])
 
   const stats = {
     totalEvents: eventTypes.length,
-    totalPhotos: media.filter((item) => item.resource_type === 'image').length,
-    totalVideos: media.filter((item) => item.resource_type === 'video').length,
+    totalPhotos: items.filter((item) => item.resource_type === 'image').length,
+    totalVideos: items.filter((item) => item.resource_type === 'video').length,
   }
 
   return (
@@ -166,7 +216,7 @@ export default function GalleryGrid({ media }: GalleryGridProps) {
             onYearChange={setSelectedYear}
             eventTypes={eventTypes || ''}
             years={years || ''}
-            totalItems={media.length}
+            totalItems={items.length}
             filteredItems={filteredItems.length}
           />
         </div>
@@ -204,6 +254,15 @@ export default function GalleryGrid({ media }: GalleryGridProps) {
             <p className="text-muted-foreground">
               Try adjusting your search or filter criteria
             </p>
+          </div>
+        )}
+
+        {hasMore && (
+          <div
+            ref={observerRef}
+            className="col-span-full flex justify-center py-8"
+          >
+            {loading ? <SpinnerMini /> : <span>Scroll to load more</span>}
           </div>
         )}
 

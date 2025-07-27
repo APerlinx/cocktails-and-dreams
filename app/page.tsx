@@ -22,7 +22,7 @@ export default async function Home() {
             playsInline
             className="absolute top-0 left-0 w-full h-full object-cover z-[-1]"
           >
-            <source src={videoBg[0].url} type="video/mp4" />
+            <source src={videoBg} type="video/mp4" />
           </video>
         ) : (
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-secondary/10d via-primary/10 to-muted-foreground z-[-1]" />
