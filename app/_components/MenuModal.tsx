@@ -68,7 +68,7 @@ const MenuModal: FC = () => {
           </li>
         ))}
       </ul>
-      <code className="text-xs border-t-2 border-gray-500/20 p-2 rounded-xl">
+      <code className="text-xs border-t-2 border-gray-500/20 p-2 ">
         Website and design by Alon Perlin
       </code>
     </div>

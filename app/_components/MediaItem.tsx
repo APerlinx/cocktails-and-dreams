@@ -3,14 +3,20 @@
 import { useState } from 'react'
 import { CldImage } from 'next-cloudinary'
 import { Badge } from './GalleryUI/badge'
-import { Dialog, DialogContent, DialogTrigger } from './GalleryUI/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from './GalleryUI/dialog'
 import { Play, Calendar, Users, Eye } from 'lucide-react'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 
 interface MediaItemProps {
   id: string
   type: 'image' | 'video'
-  src: string // CldImage for images
-  videoSrc: string // direct mp4 or cloudinary URL for video
+  src: string
+  videoSrc: string
   title: string
   eventType: string
   date: string
@@ -34,7 +40,7 @@ export function MediaItem({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="group relative overflow-hidden rounded-lg cursor-pointer transition-transform duration-200 hover:scale-[1.02]">
+        <div className="group relative overflow-hidden  cursor-pointer transition-transform duration-200">
           <div className="relative">
             {type === 'image' ? (
               <CldImage
@@ -46,8 +52,15 @@ export function MediaItem({
                 height={80}
               />
             ) : (
-              <div className="bg-black w-full aspect-video flex items-center justify-center">
-                <Play className="h-10 w-10 text-white opacity-70" />
+              <div className="relative aspect-video">
+                <video className="w-full h-auto max-h-[80vh] object-contain cursor-pointer">
+                  <source src={videoSrc} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+
+                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                  <Play className="h-10 w-10 text-white opacity-80" />
+                </div>
               </div>
             )}
 
@@ -90,11 +103,16 @@ export function MediaItem({
       </DialogTrigger>
 
       <DialogContent className="max-w-4xl max-h-[90vh] p-0">
+        <VisuallyHidden>
+          <DialogTitle>{title}</DialogTitle>
+        </VisuallyHidden>
         <div className="relative">
           {type === 'video' ? (
             <video
               controls
-              className="w-full h-auto max-h-[80vh] object-contain"
+              playsInline
+              autoPlay
+              className="w-full h-auto max-h-[80vh] object-contain cursor-pointer"
             >
               <source src={videoSrc} type="video/mp4" />
               Your browser does not support the video tag.
@@ -103,7 +121,7 @@ export function MediaItem({
             <CldImage
               src={src}
               alt={title}
-              className="w-full h-auto max-h-[80vh] object-contain"
+              className="w-full h-auto max-h-[80vh] object-contain "
               width={200}
               height={200}
             />

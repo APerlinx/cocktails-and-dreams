@@ -173,7 +173,7 @@ export default function GalleryGrid({ media }: GalleryGridProps) {
 
         {/* Gallery Grid */}
         {filteredItems.length > 0 ? (
-          <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
+          <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-1 space-y-1">
             {filteredItems.map((item) => {
               const context = item.context || {}
 
