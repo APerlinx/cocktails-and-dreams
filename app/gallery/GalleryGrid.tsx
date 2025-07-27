@@ -8,6 +8,7 @@ import { Card, CardContent } from '../_components/GalleryUI//card'
 import { Input } from '../_components/GalleryUI//input'
 import { MediaItem } from '../_components/MediaItem'
 import SpinnerMini from '../_components/SpinnerMini'
+import { useGalleryFilters } from './useGalleryFilters'
 
 export type MediaAsset = {
   public_id: string
@@ -37,6 +38,13 @@ export default function GalleryGrid() {
   const [hasMore, setHasMore] = useState(true)
   const [loading, setLoading] = useState(false)
   const [hasTriggered, setHasTriggered] = useState(false)
+  const { filteredItems, eventTypes, years } = useGalleryFilters(
+    items,
+    searchQuery,
+    selectedEventType,
+    selectedMediaType,
+    selectedYear
+  )
 
   const fetchMore = useCallback(async () => {
     if (loading || !hasMore) return
@@ -77,63 +85,14 @@ export default function GalleryGrid() {
       { rootMargin: '200px' }
     )
 
-    const target = observerRef.current // ✅ Capture the ref value
+    const target = observerRef.current
 
     if (target) observer.observe(target)
 
     return () => {
-      if (target) observer.unobserve(target) // ✅ Use the captured value
+      if (target) observer.unobserve(target)
     }
   }, [loading, hasMore, fetchMore, hasTriggered])
-
-  const eventTypes = useMemo(() => {
-    return [
-      ...new Set(
-        items
-          .map((item) => item.context?.event_type)
-          .filter((eventType): eventType is string => Boolean(eventType))
-      ),
-    ].sort()
-  }, [items])
-
-  const years = useMemo(() => {
-    return [
-      ...new Set(
-        items
-          .map((item) => item.context?.year)
-          .filter((year): year is string => Boolean(year))
-      ),
-    ]
-      .sort()
-      .reverse()
-  }, [items])
-
-  const filteredItems = useMemo(() => {
-    return items.filter((item) => {
-      const context = item.context || {}
-
-      const title = context.title?.toLowerCase() || ''
-      const eventType = context.event_type?.toLowerCase() || ''
-      const year = context.year || ''
-
-      const matchesSearch =
-        searchQuery === '' ||
-        title.includes(searchQuery.toLowerCase()) ||
-        eventType.includes(searchQuery.toLowerCase())
-
-      const matchesEventType =
-        selectedEventType === null || context.event_type === selectedEventType
-
-      const matchesMediaType =
-        selectedMediaType === null || item.resource_type === selectedMediaType
-
-      const matchesYear = selectedYear === null || context.year === selectedYear
-
-      return (
-        matchesSearch && matchesEventType && matchesMediaType && matchesYear
-      )
-    })
-  }, [searchQuery, selectedEventType, selectedMediaType, selectedYear, items])
 
   const stats = {
     totalEvents: eventTypes.length,
