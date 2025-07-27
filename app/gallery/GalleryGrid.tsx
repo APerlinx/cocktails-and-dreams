@@ -1,11 +1,11 @@
 'use client'
 
-import { Camera, Search, Users, Video, Zap } from 'lucide-react'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { Camera, Search } from 'lucide-react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { GalleryFilters } from '../_components/GalleryFilters'
-import { Badge } from '../_components/GalleryUI//badge'
-import { Card, CardContent } from '../_components/GalleryUI//card'
 import { Input } from '../_components/GalleryUI//input'
+import GalleryFooter from '../_components/GalleryUI/GalleryFooter'
+import { GalleryHeader } from '../_components/GalleryUI/GalleryHeader'
 import { MediaItem } from '../_components/MediaItem'
 import SpinnerMini from '../_components/SpinnerMini'
 import { useGalleryFilters } from './useGalleryFilters'
@@ -24,7 +24,15 @@ export type MediaAsset = {
   }
 }
 
-export default function GalleryGrid() {
+type Props = {
+  stats: {
+    totalPhotos: number
+    totalVideos: number
+    totalEventTypes: number
+  }
+}
+
+export default function GalleryGrid({ stats }: Props) {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedEventType, setSelectedEventType] = useState<string | null>(
     null
@@ -52,7 +60,7 @@ export default function GalleryGrid() {
     setLoading(true)
     try {
       const res = await fetch(
-        `/api/cloudinary?folder=gallery&max=8${
+        `/api/cloudinary?folder=gallery&max=20${
           cursor ? `&nextCursor=${cursor}` : ''
         }`
       )
@@ -62,7 +70,7 @@ export default function GalleryGrid() {
       setCursor(data.nextCursor)
       setHasMore(data.hasMore)
     } catch (err) {
-      console.error('Failed to fetch media:', err)
+      console.error(err)
     } finally {
       setLoading(false)
       setHasTriggered(false)
@@ -94,62 +102,14 @@ export default function GalleryGrid() {
     }
   }, [loading, hasMore, fetchMore, hasTriggered])
 
-  const stats = {
-    totalEvents: eventTypes.length,
-    totalPhotos: items.filter((item) => item.resource_type === 'image').length,
-    totalVideos: items.filter((item) => item.resource_type === 'video').length,
-  }
-
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="relative bg-gradient-to-br from-primary/5 via-background to-secondary/10">
-        <div className="container mx-auto px-4 py-16 max-w-7xl">
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Camera className="h-8 w-8 text-primary" />
-              <h1 className="text-5xl">Event Gallery</h1>
-            </div>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Relive the best moments from our events. From electrifying
-              festivals to intimate cocktail tastings, explore the energy and
-              excitement that makes Cocktails&Dreams unforgettable.
-            </p>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Card className="text-center bg-card-1">
-              <CardContent className="pt-4">
-                <Zap className="h-6 w-6 text-primary mx-auto mb-2" />
-                <div className="text-2xl">{stats.totalEvents}</div>
-                <p className="text-sm text-muted-foreground">Event Types</p>
-              </CardContent>
-            </Card>
-            <Card className="text-center bg-card-2">
-              <CardContent className="pt-4">
-                <Camera className="h-6 w-6 text-primary mx-auto mb-2" />
-                <div className="text-2xl">{stats.totalPhotos}</div>
-                <p className="text-sm text-muted-foreground">Photos</p>
-              </CardContent>
-            </Card>
-            <Card className="text-center bg-card-3 ">
-              <CardContent className="pt-4">
-                <Video className="h-6 w-6 text-primary mx-auto mb-2" />
-                <div className="text-2xl">{stats.totalVideos}</div>
-                <p className="text-sm text-muted-foreground">Videos</p>
-              </CardContent>
-            </Card>
-            <Card className="text-center bg-card-4">
-              <CardContent className="pt-4">
-                <Users className="h-6 w-6 text-primary mx-auto mb-2" />
-                <div className="text-2xl">13,602</div>
-                <p className="text-sm text-muted-foreground">Total Views</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </div>
+      <GalleryHeader
+        totalEventTypes={stats.totalEventTypes}
+        totalPhotos={stats.totalPhotos}
+        totalVideos={stats.totalVideos}
+      />
 
       <div className="container mx-auto px-4 py-12 max-w-7xl">
         {/* Search */}
@@ -226,26 +186,7 @@ export default function GalleryGrid() {
         )}
 
         {/* Call to Action */}
-        <Card className="mt-16 bg-gradient-to-r from-primary/5 to-secondary/10">
-          <CardContent className="text-center py-12">
-            <h2 className="text-3xl mb-4">Want to be Featured?</h2>
-            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Tag us in your photos and videos from your night at Pulse Bar! The
-              best content gets featured in our gallery and social media.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Badge variant="outline" className="text-sm px-4 py-2">
-                #Cocktails&Dreams
-              </Badge>
-              <Badge variant="outline" className="text-sm px-4 py-2">
-                @cocktail.dreams_
-              </Badge>
-              <Badge variant="outline" className="text-sm px-4 py-2">
-                #Cocktails&Dreams
-              </Badge>
-            </div>
-          </CardContent>
-        </Card>
+        <GalleryFooter />
       </div>
     </div>
   )

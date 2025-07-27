@@ -1,16 +1,11 @@
 import { ReactElement } from 'react'
 import Footer from '../_components/Footer'
 import Header from '../_components/Header'
+import { getStaticMedia } from '../_lib/data-service'
 import Content from './Content'
 
 async function AboutPage(): Promise<ReactElement> {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/about-media`,
-    {
-      cache: 'no-store',
-    }
-  )
-  const media = await res.json()
+  const media = await getStaticMedia('about-media')
 
   return (
     <div className="min-h-screen pb-8 grid gap-12">
