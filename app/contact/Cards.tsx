@@ -221,7 +221,7 @@ export default function Cards() {
         </div>
 
         {/* Footer Message */}
-        <Card className="mt-8">
+        <Card className="mt-8 bg-gradient-to-r from-primary/5 to-secondary/10">
           <CardContent className="text-center py-8">
             <h3 className="mb-2">Ready to get started?</h3>
             <p className="text-muted-foreground mb-6">

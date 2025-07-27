@@ -30,9 +30,9 @@ type AboutImagesProps = {
 }
 
 export default function Content({ media }: AboutImagesProps) {
-  const founderOne = media.find((item) => item.filename.includes('fssnkx'))
-  const founderTwo = media.find((item) => item.filename.includes('evbnub'))
-  const mainImage = media.find((item) => item.filename.includes('q37pld'))
+  const founderOne = media.find((item) => item.filename.includes('idan'))
+  const founderTwo = media.find((item) => item.filename.includes('ofir'))
+  const mainImage = media.find((item) => item.filename.includes('journey'))
 
   const stats = [
     { label: 'Years in Business', value: '5+', icon: Clock },
@@ -89,13 +89,13 @@ export default function Content({ media }: AboutImagesProps) {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-12 max-w-6xl">
+      <div className="container mx-auto px-4 py-12 max-w-6xl ">
         {/* Stats Section */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 ">
           {stats.map((stat, index) => (
             <Card
               key={index}
-              className="text-center hover:shadow-lg transition-all duration-200"
+              className="text-center hover:shadow-lg transition-all duration-200 bg-gradient-to-r from-primary/5 to-secondary/10 "
             >
               <CardContent className="pt-6">
                 <stat.icon className="h-8 w-8 text-primary mx-auto mb-3" />
