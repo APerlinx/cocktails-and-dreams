@@ -58,7 +58,9 @@ export async function getCloudinaryMedia({
 {
   /* Fetch media for about page and video for home page */
 }
-
+{
+  /*Deployment test */
+}
 export async function getStaticMedia(folder: string) {
   try {
     const res = await fetch(
