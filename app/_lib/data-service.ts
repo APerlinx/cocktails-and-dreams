@@ -61,35 +61,31 @@ export async function getCloudinaryMedia({
 
 export async function getStaticMedia(folder: string) {
   try {
-    const expression = `folder="${folder}"`
-    const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
-    const apiKey = process.env.CLOUDINARY_API_KEY
-    const apiSecret = process.env.CLOUDINARY_API_SECRET
-
     const res = await fetch(
-      `https://api.cloudinary.com/v1_1/${cloudName}/resources/search`,
+      `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/resources/search`,
       {
         method: 'POST',
         headers: {
           Authorization: `Basic ${Buffer.from(
-            `${apiKey}:${apiSecret}`
+            `${process.env.CLOUDINARY_API_KEY}:${process.env.CLOUDINARY_API_SECRET}`
           ).toString('base64')}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          expression,
+          expression: `folder="${folder}"`,
           max_results: 100,
           with_field: 'context',
         }),
-        cache: 'no-store',
+
+        next: { revalidate: 60 * 60 },
       }
     )
 
     if (!res.ok) throw new Error('Failed to fetch media')
 
-    const { resources } = (await res.json()) as CloudinarySearchResponse
+    const { resources: items } = await res.json()
 
-    return resources.map((item: any) => ({
+    return items.map((item: any) => ({
       public_id: item.public_id,
       resource_type: item.resource_type,
       url: item.url,
