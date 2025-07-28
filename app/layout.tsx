@@ -17,11 +17,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Cocktails and dreams',
-  description: 'Cocktail and dreams website',
+  description: 'Cocktails and dreams website',
   openGraph: {
     title: 'Cocktails and dreams',
-    description: 'Best cocktails in town',
-    url: 'https://cocktails-and-dreams.com',
+    description: 'Active bar with cocktails specialty',
+    url: 'www.cocktailsndreams.art',
     siteName: 'Cocktails & Dreams',
     images: [
       {
