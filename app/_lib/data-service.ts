@@ -16,8 +16,8 @@ type CloudinarySearchResponse = {
 
 type GetCloudinaryMediaOptions = {
   folderName: string
-  maxResults?: number // default to 100
-  nextCursor?: string // used for infinite scroll
+  maxResults?: number
+  nextCursor?: string
 }
 
 {
@@ -45,6 +45,7 @@ export async function getCloudinaryMedia({
         max_results: maxResults,
         with_field: 'context',
         next_cursor: nextCursor,
+        sort_by: [{ created_at: 'desc' }],
       }),
     }
   )

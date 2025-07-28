@@ -1,7 +1,7 @@
 'use client'
 
-import { Camera, Search } from 'lucide-react'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { ArrowDownCircle, Camera, Search } from 'lucide-react'
+import { useCallback, useEffect, useState } from 'react'
 import { GalleryFilters } from '../_components/GalleryFilters'
 import { Input } from '../_components/GalleryUI//input'
 import GalleryFooter from '../_components/GalleryUI/GalleryFooter'
@@ -45,7 +45,6 @@ export default function GalleryGrid({ stats }: Props) {
   const [cursor, setCursor] = useState<string | null>(null)
   const [hasMore, setHasMore] = useState(true)
   const [loading, setLoading] = useState(false)
-  const [hasTriggered, setHasTriggered] = useState(false)
   const { filteredItems, eventTypes, years } = useGalleryFilters(
     items,
     searchQuery,
@@ -53,6 +52,31 @@ export default function GalleryGrid({ stats }: Props) {
     selectedMediaType,
     selectedYear
   )
+  const totalItems = stats.totalPhotos + stats.totalVideos
+
+  const fetchInitialMedia = async () => {
+    const res = await fetch(`/api/cloudinary?folder=gallery&max=4`)
+    const data = await res.json()
+    return data
+  }
+
+  useEffect(() => {
+    const loadInitial = async () => {
+      setLoading(true)
+      try {
+        const data = await fetchInitialMedia()
+        setItems(data.items)
+        setCursor(data.nextCursor)
+        setHasMore(data.hasMore)
+      } catch (err) {
+        console.error(err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadInitial()
+  }, [])
 
   const fetchMore = useCallback(async () => {
     if (loading || !hasMore) return
@@ -60,7 +84,7 @@ export default function GalleryGrid({ stats }: Props) {
     setLoading(true)
     try {
       const res = await fetch(
-        `/api/cloudinary?folder=gallery&max=20${
+        `/api/cloudinary?folder=gallery&max=4${
           cursor ? `&nextCursor=${cursor}` : ''
         }`
       )
@@ -73,34 +97,8 @@ export default function GalleryGrid({ stats }: Props) {
       console.error(err)
     } finally {
       setLoading(false)
-      setHasTriggered(false)
     }
   }, [cursor, hasMore, loading])
-
-  const observerRef = useRef<HTMLDivElement | null>(null)
-
-  useEffect(() => {
-    if (!observerRef.current || !hasMore || loading || hasTriggered) return
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries
-        if (entry.isIntersecting) {
-          setHasTriggered(true)
-          fetchMore()
-        }
-      },
-      { rootMargin: '200px' }
-    )
-
-    const target = observerRef.current
-
-    if (target) observer.observe(target)
-
-    return () => {
-      if (target) observer.unobserve(target)
-    }
-  }, [loading, hasMore, fetchMore, hasTriggered])
 
   return (
     <div className="min-h-screen bg-background">
@@ -135,14 +133,14 @@ export default function GalleryGrid({ stats }: Props) {
             onYearChange={setSelectedYear}
             eventTypes={eventTypes || ''}
             years={years || ''}
-            totalItems={items.length}
+            totalItems={totalItems}
             filteredItems={filteredItems.length}
           />
         </div>
 
         {/* Gallery Grid */}
         {filteredItems.length > 0 ? (
-          <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-1 space-y-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1">
             {filteredItems.map((item) => {
               const context = item.context || {}
 
@@ -167,21 +165,35 @@ export default function GalleryGrid({ stats }: Props) {
             })}
           </div>
         ) : (
-          <div className="text-center py-12">
-            <Camera className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-lg mb-2">No media found</h3>
-            <p className="text-muted-foreground">
-              Try adjusting your search or filter criteria
-            </p>
-          </div>
+          !loading && (
+            <div className="text-center py-12">
+              <Camera className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+              <h3 className="text-lg mb-2">No media found</h3>
+              <p className="text-muted-foreground">
+                Try adjusting your search or filter criteria
+              </p>
+            </div>
+          )
         )}
 
         {hasMore && (
           <div
-            ref={observerRef}
-            className="col-span-full flex justify-center py-8"
+            className={`col-span-full flex justify-center py-8 ${
+              !loading
+                ? 'bg-gradient-to-b from-transparent via-white to-white mt-[-200] z-[100] relative h-100 w-full'
+                : ''
+            }`}
           >
-            {loading ? <SpinnerMini /> : <span>Scroll to load more</span>}
+            {loading ? (
+              <SpinnerMini />
+            ) : (
+              <button
+                onClick={fetchMore}
+                className="px-4 py-2 text-primary hover:text-primary/30 transition cursor-pointer flex flex-col justify-center items-center "
+              >
+                <span>Load More</span> <ArrowDownCircle />
+              </button>
+            )}
           </div>
         )}
 
