@@ -90,7 +90,7 @@ export async function getStaticMedia(folder: string) {
     return items.map((item: any) => ({
       public_id: item.public_id,
       resource_type: item.resource_type,
-      url: item.url,
+      url: item.secure_url,
       filename: item.filename,
       context: item.context || {},
     }))
