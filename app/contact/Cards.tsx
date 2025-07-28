@@ -26,7 +26,7 @@ export default function Cards() {
     name: 'Cocktails and Dreams',
     phone: '054-493-0095',
     whatsapp: '+972 54-493-0095',
-    email: 'idanherman@gmail.com',
+    email: 'cocktails8dreams1@gmail.com',
     instagram: 'cocktail.dreams_',
     facebook: 'facebooklink.com',
     businessHours: {

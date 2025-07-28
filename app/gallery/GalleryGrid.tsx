@@ -55,7 +55,7 @@ export default function GalleryGrid({ stats }: Props) {
   const totalItems = stats.totalPhotos + stats.totalVideos
 
   const fetchInitialMedia = async () => {
-    const res = await fetch(`/api/cloudinary?folder=gallery&max=4`)
+    const res = await fetch(`/api/cloudinary?folder=gallery&max=20`)
     const data = await res.json()
     return data
   }
@@ -84,7 +84,7 @@ export default function GalleryGrid({ stats }: Props) {
     setLoading(true)
     try {
       const res = await fetch(
-        `/api/cloudinary?folder=gallery&max=4${
+        `/api/cloudinary?folder=gallery&max=20${
           cursor ? `&nextCursor=${cursor}` : ''
         }`
       )
