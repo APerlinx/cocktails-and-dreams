@@ -58,18 +58,38 @@ export async function getCloudinaryMedia({
 {
   /* Fetch media for about page and video for home page */
 }
+
 export async function getStaticMedia(folder: string) {
   try {
+    const expression = `folder="${folder}"`
+    const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+    const apiKey = process.env.CLOUDINARY_API_KEY
+    const apiSecret = process.env.CLOUDINARY_API_SECRET
+
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/cloudinary?folder=${folder}`,
-      { cache: 'no-store' }
+      `https://api.cloudinary.com/v1_1/${cloudName}/resources/search`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Basic ${Buffer.from(
+            `${apiKey}:${apiSecret}`
+          ).toString('base64')}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          expression,
+          max_results: 100,
+          with_field: 'context',
+        }),
+        cache: 'no-store',
+      }
     )
 
     if (!res.ok) throw new Error('Failed to fetch media')
 
-    const { items } = await res.json()
+    const { resources } = (await res.json()) as CloudinarySearchResponse
 
-    return items.map((item: any) => ({
+    return resources.map((item: any) => ({
       public_id: item.public_id,
       resource_type: item.resource_type,
       url: item.url,
@@ -87,23 +107,42 @@ export async function getStaticMedia(folder: string) {
 }
 export async function getStaticMediaStats(folder: string) {
   try {
+    const expression = `folder="${folder}"`
+    const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+    const apiKey = process.env.CLOUDINARY_API_KEY
+    const apiSecret = process.env.CLOUDINARY_API_SECRET
+
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/cloudinary?folder=${folder}`,
-      { next: { revalidate: 60 * 60 * 24 * 7 } }
+      `https://api.cloudinary.com/v1_1/${cloudName}/resources/search`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Basic ${Buffer.from(
+            `${apiKey}:${apiSecret}`
+          ).toString('base64')}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          expression,
+          max_results: 500,
+          with_field: 'context',
+        }),
+        next: { revalidate: 60 * 60 * 24 * 7 },
+      }
     )
 
-    if (!res.ok) throw new Error('Failed to fetch media')
+    if (!res.ok) throw new Error('Failed to fetch media stats')
 
-    const { items } = await res.json()
+    const { resources } = (await res.json()) as CloudinarySearchResponse
 
-    const totalPhotos = items.filter(
-      (item: any) => item.resource_type === 'image'
+    const totalPhotos = resources.filter(
+      (r) => r.resource_type === 'image'
     ).length
-    const totalVideos = items.filter(
-      (item: any) => item.resource_type === 'video'
+    const totalVideos = resources.filter(
+      (r) => r.resource_type === 'video'
     ).length
     const totalEventTypes = new Set(
-      items.map((item: any) => item.context?.event_type).filter(Boolean)
+      resources.map((r) => r.context?.event_type).filter(Boolean)
     ).size
 
     return {
