@@ -2,6 +2,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  --vh: 100%;
   --font-size: 14px;
   --background: #ffffff;
   --foreground: oklch(0.145 0 0);
@@ -87,7 +88,9 @@
   --sidebar-border: oklch(0.269 0 0);
   --sidebar-ring: oklch(0.439 0 0);
 }
-
+.mobile-vh-fix {
+  height: calc(var(--vh, 1vh) * 100);
+}
 @layer base {
   * {
     @apply border-border outline-ring/50;

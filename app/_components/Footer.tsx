@@ -43,7 +43,7 @@ function Footer(): ReactElement {
 
   return (
     <footer
-      className={`row-start-3 flex gap-[24px] flex-wrap items-center justify-center ${textColorClass}`}
+      className={`row-start-3 flex gap-[24px] flex-wrap items-center justify-center ${textColorClass} `}
     >
       {links.map(({ href, text, icon }) => {
         const isExternal = href.startsWith('http')
