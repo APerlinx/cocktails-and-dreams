@@ -5,9 +5,12 @@ import {
   Facebook,
   Instagram,
   Mail,
+  Martini,
+  Menu,
   MessageCircle,
   Phone,
   Send,
+  Star,
   User,
 } from 'lucide-react'
 import Image from 'next/image'
@@ -76,11 +79,27 @@ export default function Cards() {
         </div>
 
         {/* Business Name Card */}
-        <CardHeader>
-          <CardTitle className="flex justify-center mt-[-30]">
-            <Image src="logo-text.svg" height={200} width={150} alt="logo" />
-          </CardTitle>
-        </CardHeader>
+        <Card
+          className="bg-gradient-to-r from-primary/5 to-secondary/10 mb-4"
+          dir="rtl"
+        >
+          <CardContent className="text-center py-12">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Star className="h-4 w-4" />
+                <span>בר אקטיבי</span>
+              </div>
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Martini className="h-4 w-4" />
+                <span>סדנאות קוקטילים</span>
+              </div>
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Menu className="h-4 w-4" />
+                <span>תפריט קוקטלים ייחודי</span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Contact Methods Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">

@@ -78,8 +78,6 @@ export async function getStaticMedia(folder: string) {
           max_results: 100,
           with_field: 'context',
         }),
-
-        next: { revalidate: 60 * 60 },
       }
     )
 

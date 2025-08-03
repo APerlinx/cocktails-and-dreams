@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState, ReactElement } from 'react'
 import MenuCircle from './MenuCircle'
+import HomeCard from './HomeCard'
 
 function Footer(): ReactElement {
   const pathname = usePathname()
