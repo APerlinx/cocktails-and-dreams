@@ -7,7 +7,7 @@ import HomeCard from './_components/HomeCard'
 export default async function Home() {
   const videoBg = await getStaticMedia('home-media')
   return (
-    <div className="flex flex-col justify-evenly min-h-screen">
+    <div className="flex flex-col justify-evenly">
       <div className="font-sans overflow-hidden grid grid-rows-[20px_1fr] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 sm:p">
         <main className="flex flex-col gap-[32px] row-start-2 items-center ">
           {videoBg[0].url ? (
