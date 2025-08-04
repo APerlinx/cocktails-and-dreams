@@ -63,6 +63,7 @@ export function MediaItem({
                   <source src={videoSrc} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
+                <Play className="absolute top-2 right-1 z-10" color="white" />
               </div>
             )}
 
