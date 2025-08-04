@@ -185,7 +185,7 @@ export default function GalleryGrid({ stats }: Props) {
           <div
             className={`col-span-full flex justify-center py-8 ${
               !loading
-                ? 'bg-gradient-to-b from-transparent via-white to-white mt-[-200] z-[2] relative h-100 w-full'
+                ? 'bg-gradient-to-b from-transparent via-white to-white mt-[-200] relative h-100 w-full'
                 : ''
             }`}
           >

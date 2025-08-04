@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CldImage } from 'next-cloudinary'
 import { Badge } from './GalleryUI/badge'
 import {
@@ -11,6 +11,8 @@ import {
 } from './GalleryUI/dialog'
 import { Play, Calendar, Users, Eye } from 'lucide-react'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import Spinner from './Spinner'
+import SpinnerMini from './SpinnerMini'
 
 interface MediaItemProps {
   id: string
@@ -47,9 +49,11 @@ export function MediaItem({
                 src={src}
                 alt={title}
                 className="object-cover w-full h-full aspect-square"
-                onLoad={() => setIsLoaded(true)}
                 width={100}
                 height={100}
+                loading="lazy"
+                placeholder="blur"
+                blurDataURL={src}
               />
             ) : (
               <div className="relative w-full h-full overflow-hidden">
@@ -109,13 +113,13 @@ export function MediaItem({
         <VisuallyHidden>
           <DialogTitle>{title}</DialogTitle>
         </VisuallyHidden>
-        <div className="relative">
+        <div className="relative max-h-screen">
           {type === 'video' ? (
             <video
               controls
               playsInline
               autoPlay
-              className="w-full h-auto max-h-[80vh] object-contain cursor-pointer"
+              className="w-full h-auto object-contain cursor-pointer"
             >
               <source src={videoSrc} type="video/mp4" />
               Your browser does not support the video tag.
@@ -124,9 +128,12 @@ export function MediaItem({
             <CldImage
               src={src}
               alt={title}
-              className="w-full h-auto max-h-[80vh] object-contain"
+              className="w-full h-auto object-contain"
               width={200}
               height={200}
+              loading="lazy"
+              placeholder="blur"
+              blurDataURL={videoSrc}
             />
           )}
 
