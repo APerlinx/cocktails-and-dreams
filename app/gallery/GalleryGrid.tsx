@@ -9,6 +9,7 @@ import { GalleryHeader } from '../_components/GalleryUI/GalleryHeader'
 import { MediaItem } from '../_components/MediaItem'
 import SpinnerMini from '../_components/SpinnerMini'
 import { useGalleryFilters } from './useGalleryFilters'
+import Masonry from 'react-masonry-css'
 
 export type MediaAsset = {
   public_id: string
@@ -140,7 +141,11 @@ export default function GalleryGrid({ stats }: Props) {
 
         {/* Gallery Grid */}
         {filteredItems.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1">
+          <Masonry
+            breakpointCols={{ default: 4, 1200: 3, 800: 2, 500: 1 }}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
+          >
             {filteredItems.map((item) => {
               const context = item.context || {}
 
@@ -163,7 +168,7 @@ export default function GalleryGrid({ stats }: Props) {
                 </div>
               )
             })}
-          </div>
+          </Masonry>
         ) : (
           !loading && (
             <div className="text-center py-12">
@@ -176,7 +181,7 @@ export default function GalleryGrid({ stats }: Props) {
           )
         )}
 
-        {hasMore && (
+        {hasMore && filteredItems.length > 0 && (
           <div
             className={`col-span-full flex justify-center py-8 ${
               !loading

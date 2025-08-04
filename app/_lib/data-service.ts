@@ -25,7 +25,7 @@ type GetCloudinaryMediaOptions = {
 }
 export async function getCloudinaryMedia({
   folderName,
-  maxResults = 100,
+  maxResults = 20,
   nextCursor,
 }: GetCloudinaryMediaOptions): Promise<CloudinarySearchResponse> {
   const expression = `folder="${folderName}"`
@@ -58,9 +58,7 @@ export async function getCloudinaryMedia({
 {
   /* Fetch media for about page and video for home page */
 }
-{
-  /*Deployment test */
-}
+
 export async function getStaticMedia(folder: string) {
   try {
     const res = await fetch(
@@ -98,9 +96,6 @@ export async function getStaticMedia(folder: string) {
   }
 }
 
-{
-  /* Fetch media for stats once a week */
-}
 export async function getStaticMediaStats(folder: string) {
   try {
     const expression = `folder="${folder}"`
@@ -123,7 +118,7 @@ export async function getStaticMediaStats(folder: string) {
           max_results: 500,
           with_field: 'context',
         }),
-        next: { revalidate: 60 * 60 * 24 * 7 },
+        next: { revalidate: 0 },
       }
     )
 

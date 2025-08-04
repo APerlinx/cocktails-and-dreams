@@ -249,3 +249,20 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;
 }
+
+/* Gallery Grid ( masonry lib ) */
+
+.my-masonry-grid {
+  display: flex;
+  margin-left: -8px; /* gutter size offset */
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 8px; /* gutter size */
+  background-clip: padding-box;
+}
+
+/* Style your items */
+.my-masonry-grid_column > div {
+  margin-bottom: 8px;
+}

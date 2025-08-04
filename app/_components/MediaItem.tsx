@@ -40,27 +40,29 @@ export function MediaItem({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="group relative overflow-hidden  cursor-pointer transition-transform duration-200">
-          <div className="relative">
+        <div className="group relative overflow-hidden cursor-pointer transition-transform duration-200">
+          <div className="relative h-full w-full overflow-hidden">
             {type === 'image' ? (
               <CldImage
                 src={src}
                 alt={title}
-                className="w-full h-auto object-cover transition-opacity duration-200"
+                className="object-cover w-full h-full aspect-square"
                 onLoad={() => setIsLoaded(true)}
-                width={80}
-                height={80}
+                width={100}
+                height={100}
               />
             ) : (
-              <div className="relative aspect-video">
-                <video className="w-full h-auto max-h-[80vh] object-contain cursor-pointer">
+              <div className="relative w-full h-full overflow-hidden">
+                <video
+                  className="object-cover w-full h-full"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                >
                   <source src={videoSrc} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
-
-                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                  <Play className="h-10 w-10 text-white opacity-80" />
-                </div>
               </div>
             )}
 
@@ -121,7 +123,7 @@ export function MediaItem({
             <CldImage
               src={src}
               alt={title}
-              className="w-full h-auto max-h-[80vh] object-contain "
+              className="w-full h-auto max-h-[80vh] object-contain"
               width={200}
               height={200}
             />
