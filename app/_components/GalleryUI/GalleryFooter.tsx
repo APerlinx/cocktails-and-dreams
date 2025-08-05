@@ -10,7 +10,7 @@ export default function GalleryFooter() {
           Tag us in your photos and videos from your night at Pulse Bar! The
           best content gets featured in our gallery and social media.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-row flex-wrap gap-4 justify-center">
           <Badge variant="outline" className="text-sm px-4 py-2">
             #Cocktails&Dreams
           </Badge>
