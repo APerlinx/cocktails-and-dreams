@@ -13,7 +13,6 @@ import {
   Star,
   User,
 } from 'lucide-react'
-import Image from 'next/image'
 import { Button } from '../_components/ContactUi/button'
 import {
   Card,
@@ -23,6 +22,7 @@ import {
   CardTitle,
 } from '../_components/ContactUi/card'
 import { Separator } from '../_components/ContactUi/separator'
+import Image from 'next/image'
 
 export default function Cards() {
   const contactInfo = {
@@ -31,10 +31,10 @@ export default function Cards() {
     whatsapp: '+972 54-493-0095',
     email: 'cocktails8dreams1@gmail.com',
     instagram: 'cocktail.dreams_',
-    facebook: 'facebooklink.com',
+    facebook: 'We dont have facebook yet but we are on it!',
     businessHours: {
-      weekdays: 'Sunday - Friday: 9:00 AM - 6:00 PM',
-      weekends: 'Friday - Saturday: 10:00 AM - 4:00 PM',
+      weekdays: 'Sunday - Thursday: 07:00 AM - 22:00 PM',
+      weekends: 'Friday: 07:00 AM - 17:00 PM',
     },
   }
 
@@ -79,24 +79,25 @@ export default function Cards() {
         </div>
 
         {/* Business Name Card */}
-        <Card
-          className="bg-gradient-to-r from-primary/5 to-secondary/10 mb-4"
-          dir="rtl"
-        >
-          <CardContent className="text-center py-12">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <Star className="h-4 w-4" />
-                <span>בר אקטיבי</span>
-              </div>
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <Martini className="h-4 w-4" />
-                <span>סדנאות קוקטילים</span>
-              </div>
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <Menu className="h-4 w-4" />
-                <span>תפריט קוקטלים ייחודי</span>
-              </div>
+        <Card className="bg-gradient-to-r from-primary/5 to-secondary/10 mb-4 shadow-sm">
+          <CardContent className="flex flex-col items-center justify-center p-8 space-y-2">
+            <Image
+              src="/logo-notext.svg"
+              height={90}
+              width={90}
+              alt="logo of cocktails and dreams"
+            />
+            <h2 className="text-2xl font-bold text-primary tracking-tight">
+              Cocktails & Dreams
+            </h2>
+            <div className="text-muted-foreground text-sm mb-1">
+              בר אקטיבי • סדנאות קוקטיילים • אספקת קוקטיילים לברים, מסעדות
+              ואירועים
+            </div>
+            <Separator className="my-2" />
+            <div className="flex gap-2 items-center text-yellow-500 text-sm">
+              <Star className="h-4 w-4 fill-yellow-500" />
+              <span>100+ אירועים • 5 כוכבים</span>
             </div>
           </CardContent>
         </Card>
@@ -146,26 +147,23 @@ export default function Cards() {
             </CardContent>
           </Card>
 
-          {/* Email */}
+          {/* Facebook */}
           <Card className="hover:shadow-lg transition-shadow duration-200">
             <CardHeader>
               <div className="flex items-center gap-3">
-                <Mail className="h-6 w-6 text-primary" />
-                <CardTitle>Email</CardTitle>
+                <Facebook className="h-6 w-6 text-primary" />
+                <CardTitle>Facebook</CardTitle>
               </div>
-              <CardDescription>
-                Send us an email for detailed inquiries
-              </CardDescription>
+              <CardDescription>Visit our facebook profile</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="mb-4">{contactInfo.email}</p>
+              <p className="mb-4">{contactInfo.facebook}</p>
               <Button
-                onClick={handleEmailClick}
-                variant="outline"
-                className="w-full"
+                onClick={handleWebsiteClick}
+                className="w-full bg-facebook-card hover:bg-facebook-card-hover"
               >
-                <Send className="h-4 w-4 mr-2" />
-                Send Email
+                <Facebook className="h-4 w-4 mr-2" />
+                Visit facebook
               </Button>
             </CardContent>
           </Card>
@@ -196,6 +194,30 @@ export default function Cards() {
 
         {/* Additional Information */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Email */}
+          <Card className="hover:shadow-lg transition-shadow duration-200">
+            <CardHeader>
+              <div className="flex items-center gap-3">
+                <Mail className="h-6 w-6 text-primary" />
+                <CardTitle>Email</CardTitle>
+              </div>
+              <CardDescription>
+                Send us an email for detailed inquiries
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="mb-4">{contactInfo.email}</p>
+              <Button
+                onClick={handleEmailClick}
+                variant="outline"
+                className="w-full"
+              >
+                <Send className="h-4 w-4 mr-2" />
+                Send Email
+              </Button>
+            </CardContent>
+          </Card>
+
           {/* Business Hours */}
           <Card>
             <CardHeader>
@@ -214,27 +236,6 @@ export default function Cards() {
                 <p className="text-sm text-muted-foreground">Weekends</p>
                 <p>{contactInfo.businessHours.weekends}</p>
               </div>
-            </CardContent>
-          </Card>
-
-          {/* Facebook */}
-          <Card className="hover:shadow-lg transition-shadow duration-200">
-            <CardHeader>
-              <div className="flex items-center gap-3">
-                <Facebook className="h-6 w-6 text-primary" />
-                <CardTitle>Facebook</CardTitle>
-              </div>
-              <CardDescription>Visit our facebook profile</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="mb-4">{contactInfo.facebook}</p>
-              <Button
-                onClick={handleWebsiteClick}
-                className="w-full bg-facebook-card hover:bg-facebook-card-hover"
-              >
-                <Facebook className="h-4 w-4 mr-2" />
-                Visit facebook
-              </Button>
             </CardContent>
           </Card>
         </div>
