@@ -1,4 +1,4 @@
-import { Badge } from './badge'
+import { Badge } from '../badge'
 import { Card, CardContent } from './card'
 
 export default function GalleryFooter() {

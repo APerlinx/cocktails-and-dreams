@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { Button } from './GalleryUI/button'
+import { Button } from './button'
 import {
   Select,
   SelectContent,
@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from './GalleryUI/select'
-import { Badge } from './GalleryUI/badge'
+import { Badge } from './badge'
 import { X, Image, Video, Calendar } from 'lucide-react'
 
 interface GalleryFiltersProps {

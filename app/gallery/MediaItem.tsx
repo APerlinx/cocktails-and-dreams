@@ -1,18 +1,16 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import { Calendar, Eye, Play, Users } from 'lucide-react'
 import { CldImage } from 'next-cloudinary'
-import { Badge } from './GalleryUI/badge'
+import { useState } from 'react'
+import { Badge } from '../_components/badge'
 import {
   Dialog,
   DialogContent,
   DialogTitle,
   DialogTrigger,
-} from './GalleryUI/dialog'
-import { Play, Calendar, Users, Eye } from 'lucide-react'
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
-import Spinner from './Spinner'
-import SpinnerMini from './SpinnerMini'
+} from '../_components/GalleryUI/dialog'
 
 interface MediaItemProps {
   id: string

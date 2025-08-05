@@ -5,24 +5,22 @@ import {
   Facebook,
   Instagram,
   Mail,
-  Martini,
-  Menu,
   MessageCircle,
   Phone,
   Send,
   Star,
   User,
 } from 'lucide-react'
-import { Button } from '../_components/ContactUi/button'
+import Image from 'next/image'
+import { Button } from '../_components/button'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '../_components/ContactUi/card'
-import { Separator } from '../_components/ContactUi/separator'
-import Image from 'next/image'
+} from '../_components/card'
+import { Separator } from '../_components/separator'
 
 export default function Cards() {
   const contactInfo = {

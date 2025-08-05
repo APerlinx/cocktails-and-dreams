@@ -11,14 +11,14 @@ import {
   Zap,
 } from 'lucide-react'
 import { CldImage } from 'next-cloudinary'
-import { Badge } from '../_components/AboutUI/badge'
+import { Badge } from '../_components/badge'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '../_components/AboutUI/card'
+} from '../_components/card'
 
 type MediaItem = {
   public_id: string
@@ -171,10 +171,13 @@ export default function Content({ media }: AboutImagesProps) {
                   Co-Founder & Head Mixologist
                 </Badge>
                 <p className="text-muted-foreground leading-relaxed">
-                  With over 15 years in the hospitality industry, Alex brings
-                  expertise in craft cocktails and customer experience. Their
-                  innovative approach to mixology has earned recognition from
-                  industry leaders nationwide.
+                  With a genuine passion for hospitality and a knack for
+                  creativity, Idan is the driving force behind every
+                  unforgettable event. Known for his signature cocktails and
+                  personal touch, he brings energy, expertise, and good vibes
+                  wherever he goes. From crafting unique drinks to making sure
+                  every guest feels special, Idan turns every gathering into a
+                  celebration.
                 </p>
               </CardContent>
             </Card>
@@ -198,10 +201,12 @@ export default function Content({ media }: AboutImagesProps) {
                   Co-Founder & Operations Director
                 </Badge>
                 <p className="text-muted-foreground leading-relaxed">
-                  Jordan&apos;s background in business management and passion
-                  for creating memorable experiences drives the operational
-                  excellence that makes Pulse Bar a standout destination in the
-                  city&apos;s nightlife scene.
+                  Ofir is both a skilled mixologist and the person who keeps
+                  things running smoothly behind the scenes. He enjoys creating
+                  fresh cocktails for every event and making sure all the
+                  details come together as planned. With a relaxed attitude and
+                  a practical approach, Ofir helps make every experience easy
+                  and enjoyable for everyone involved
                 </p>
               </CardContent>
             </Card>
@@ -254,7 +259,7 @@ export default function Content({ media }: AboutImagesProps) {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Clock className="h-4 w-4" />
-                <span>Any hours</span>
+                <span>Any hour</span>
               </div>
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Users className="h-4 w-4" />
