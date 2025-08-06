@@ -266,3 +266,21 @@ body {
 .my-masonry-grid_column > div {
   margin-bottom: 8px;
 }
+
+.marble-bg {
+  background-image: url('/marble.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.marble-bg-2 {
+  background-image: url('/marble-2.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.circle-bg {
+  background-image: url('/circle-scatter-light.svg');
+  background-size: cover;
+  background-position: center;
+}

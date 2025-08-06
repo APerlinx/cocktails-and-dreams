@@ -9,11 +9,30 @@ interface GalleryHeaderProps {
   totalVideos: number
 }
 
-export function GalleryHeader({
-  totalEventTypes,
-  totalPhotos,
-  totalVideos,
-}: GalleryHeaderProps) {
+const statsData = [
+  {
+    label: 'Event Types',
+    icon: Zap,
+    getValue: (props: GalleryHeaderProps) => props.totalEventTypes,
+  },
+  {
+    label: 'Photos',
+    icon: Camera,
+    getValue: (props: GalleryHeaderProps) => props.totalPhotos,
+  },
+  {
+    label: 'Videos',
+    icon: Video,
+    getValue: (props: GalleryHeaderProps) => props.totalVideos,
+  },
+  {
+    label: 'Total Views',
+    icon: Users,
+    getValue: (props: GalleryHeaderProps) => props.totalPhotos * 100, // or whatever formula
+  },
+]
+
+export function GalleryHeader(props: GalleryHeaderProps) {
   return (
     <div className="relative bg-gradient-to-br from-primary/5 via-background to-secondary/10">
       <div className="container mx-auto px-4 py-16 max-w-7xl">
@@ -31,34 +50,15 @@ export function GalleryHeader({
 
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <Card className="text-center bg-card-1">
-            <CardContent className="pt-4">
-              <Zap className="h-6 w-6 text-primary mx-auto mb-2" />
-              <div className="text-2xl">{totalEventTypes}</div>
-              <p className="text-sm text-muted-foreground">Event Types</p>
-            </CardContent>
-          </Card>
-          <Card className="text-center bg-card-2">
-            <CardContent className="pt-4">
-              <Camera className="h-6 w-6 text-primary mx-auto mb-2" />
-              <div className="text-2xl">{totalPhotos}</div>
-              <p className="text-sm text-muted-foreground">Photos</p>
-            </CardContent>
-          </Card>
-          <Card className="text-center bg-card-3">
-            <CardContent className="pt-4">
-              <Video className="h-6 w-6 text-primary mx-auto mb-2" />
-              <div className="text-2xl">{totalVideos}</div>
-              <p className="text-sm text-muted-foreground">Videos</p>
-            </CardContent>
-          </Card>
-          <Card className="text-center bg-card-4">
-            <CardContent className="pt-4">
-              <Users className="h-6 w-6 text-primary mx-auto mb-2" />
-              <div className="text-2xl">{totalPhotos * 100}</div>
-              <p className="text-sm text-muted-foreground">Total Views</p>
-            </CardContent>
-          </Card>
+          {statsData.map(({ label, icon: Icon, getValue }, idx) => (
+            <Card className="text-center marble-bg-2" key={label}>
+              <CardContent className="pt-4">
+                <Icon className="h-6 w-6 text-primary mx-auto mb-2" />
+                <div className="text-2xl">{getValue(props)}</div>
+                <p className="text-sm text-muted-foreground">{label}</p>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </div>
     </div>

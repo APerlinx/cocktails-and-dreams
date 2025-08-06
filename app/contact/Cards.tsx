@@ -77,7 +77,7 @@ export default function Cards() {
         </div>
 
         {/* Business Name Card */}
-        <Card className="bg-gradient-to-r from-primary/5 to-secondary/10 mb-4 shadow-sm">
+        <Card className="marble-bg mb-4 shadow-sm ">
           <CardContent className="flex flex-col items-center justify-center p-8 space-y-2">
             <Image
               src="/logo-notext.svg"
@@ -88,7 +88,7 @@ export default function Cards() {
             <h2 className="text-2xl font-bold text-primary tracking-tight">
               Cocktails & Dreams
             </h2>
-            <div className="text-muted-foreground text-sm mb-1">
+            <div className="text-foreground text-sm mb-1" dir="rtl">
               בר אקטיבי • סדנאות קוקטיילים • אספקת קוקטיילים לברים, מסעדות
               ואירועים
             </div>
@@ -217,7 +217,7 @@ export default function Cards() {
           </Card>
 
           {/* Business Hours */}
-          <Card>
+          <Card className="circle-bg">
             <CardHeader>
               <div className="flex items-center gap-3">
                 <Clock className="h-6 w-6 text-primary" />

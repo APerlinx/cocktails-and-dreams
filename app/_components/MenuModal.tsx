@@ -6,6 +6,13 @@ import { FC, useEffect, useRef, useState } from 'react'
 import { useModal } from '../context/MenuContext'
 import { useClickOutside } from '../hooks/useClickOutside'
 import SpinnerMini from './SpinnerMini'
+import {
+  Home,
+  MessageCircleMore,
+  GalleryVerticalEnd,
+  MessageCircleQuestionMark,
+  Triangle,
+} from 'lucide-react'
 
 const MenuModal: FC = () => {
   const pathname = usePathname()
@@ -37,38 +44,47 @@ const MenuModal: FC = () => {
   }
 
   if (!isOpen) return null
-
   const links = [
-    { href: '/', label: 'Home' },
-    { href: '/contact', label: 'Contact' },
-    { href: '/gallery', label: 'Gallery' },
-    { href: '/about', label: 'About' },
+    { href: '/', label: 'Home', icon: Home },
+    { href: '/contact', label: 'Contact', icon: MessageCircleMore },
+    { href: '/gallery', label: 'Gallery', icon: Triangle },
+    { href: '/about', label: 'About', icon: MessageCircleQuestionMark },
   ]
 
   return (
     <div
-      className="bg-primary-foreground border-2 border-gray-500/20 rounded-xl fixed bottom-17 right-8 text-center"
+      className="bg-secondary border-2 border-card-2 rounded-lg fixed bottom-21 right-10 text-center z-[100] shadow-lg"
       ref={modalRef}
     >
-      <ul className="p-4">
-        {links.map(({ href, label }) => (
-          <li
+      <div className="grid grid-cols-2 grid-rows-2">
+        {links.map(({ href, label, icon: Icon }) => (
+          <Link
+            href={href}
+            onClick={handleClick(href)}
             key={href}
-            className={`hover:bg-gray-500/20 rounded-sm p-1 hover:cursor-pointer border-b border-gray-500/20 last:border-b-0 ${
-              pathname === href ? 'bg-gray-500/20' : ''
-            }`}
+            className={`
+            aspect-square flex flex-row gap-1 items-center justify-center 
+            transition 
+            cursor-pointer
+            text-sm 
+            hover:bg-primary/10
+            focus-visible:outline-none
+            ${href === '/' ? 'border-b-1 border-r-1 border-card-2' : ''}
+            ${href === '/contact' ? 'border-b-1  border-card-2' : ''}
+            ${href === '/gallery' ? 'border-r-1  border-card-2' : ''}
+            ${pathname === href ? 'bg-primary/10' : ''}
+          `}
           >
-            <Link
-              href={href}
-              onClick={handleClick(href)}
-              className="flex items-center justify-center gap-2"
-            >
-              {loadingHref === href ? <SpinnerMini /> : label}
-            </Link>
-          </li>
+            {loadingHref === href ? (
+              <SpinnerMini />
+            ) : (
+              <Icon className="w-5 h-5 " />
+            )}
+            <span>{label}</span>
+          </Link>
         ))}
-      </ul>
-      <code className="text-xs border-t-2 border-gray-500/20 p-2 ">
+      </div>
+      <code className="text-xs border-t-1 block border-primary/10  pt-2 text-primary px-2">
         Website and design by Alon Perlin
       </code>
     </div>

@@ -19,6 +19,7 @@ import {
   CardHeader,
   CardTitle,
 } from '../_components/card'
+import Image from 'next/image'
 
 type MediaItem = {
   public_id: string
@@ -91,13 +92,14 @@ export default function Content({ media }: AboutImagesProps) {
 
       <div className="container mx-auto px-4 py-12 max-w-6xl ">
         {/* Stats Section */}
+
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 ">
           {stats.map((stat, index) => (
             <Card
               key={index}
-              className="text-center hover:shadow-lg transition-all duration-200 bg-gradient-to-r from-primary/5 to-secondary/10 "
+              className="marble-bg-2 text-center hover:shadow-lg transition-all duration-200 relative overflow-hidden"
             >
-              <CardContent className="pt-6">
+              <CardContent className="relative pt-6">
                 <stat.icon className="h-8 w-8 text-primary mx-auto mb-3" />
                 <div className="text-2xl mb-1">{stat.value}</div>
                 <p className="text-sm text-muted-foreground">{stat.label}</p>
@@ -108,7 +110,7 @@ export default function Content({ media }: AboutImagesProps) {
 
         {/* Our Story Section */}
         <div className="mb-16">
-          <Card className="overflow-hidden">
+          <Card className="overflow-hidden marble-bg-2">
             <div className="grid md:grid-cols-2">
               <div className="relative w-full h-full min-h-[400px]">
                 {mainImage && (
