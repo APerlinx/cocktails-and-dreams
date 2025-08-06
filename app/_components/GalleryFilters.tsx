@@ -70,7 +70,7 @@ export function GalleryFilters({
               <SelectTrigger className="w-full sm:w-48">
                 <SelectValue placeholder="All events" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent dir="rtl">
                 <SelectItem value="all">All events</SelectItem>
                 {eventTypes.map((type) => (
                   <SelectItem key={type} value={type}>

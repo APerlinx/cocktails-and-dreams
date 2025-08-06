@@ -135,11 +135,28 @@ export async function getStaticMediaStats(folder: string) {
     const totalEventTypes = new Set(
       resources.map((r) => r.context?.event_type).filter(Boolean)
     ).size
+    const eventTypes = [
+      ...new Set(
+        resources
+          .map((r) => r.context?.event_type)
+          .filter((val): val is string => !!val)
+      ),
+    ]
+
+    const years = [
+      ...new Set(
+        resources
+          .map((r) => r.context?.year)
+          .filter((val): val is string => !!val)
+      ),
+    ]
 
     return {
       totalPhotos,
       totalVideos,
       totalEventTypes,
+      eventTypes: eventTypes ?? [],
+      years: years ?? [],
     }
   } catch (err) {
     console.error(`getStaticMediaStats(${folder}) failed:`, err)
@@ -147,6 +164,8 @@ export async function getStaticMediaStats(folder: string) {
       totalPhotos: 0,
       totalVideos: 0,
       totalEventTypes: 0,
+      eventTypes: [],
+      years: [],
     }
   }
 }

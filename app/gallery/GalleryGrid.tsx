@@ -30,6 +30,8 @@ type Props = {
     totalPhotos: number
     totalVideos: number
     totalEventTypes: number
+    eventTypes: string[]
+    years: string[]
   }
 }
 
@@ -46,7 +48,7 @@ export default function GalleryGrid({ stats }: Props) {
   const [cursor, setCursor] = useState<string | null>(null)
   const [hasMore, setHasMore] = useState(true)
   const [loading, setLoading] = useState(false)
-  const { filteredItems, eventTypes, years } = useGalleryFilters(
+  const { filteredItems } = useGalleryFilters(
     items,
     searchQuery,
     selectedEventType,
@@ -132,8 +134,8 @@ export default function GalleryGrid({ stats }: Props) {
             onEventTypeChange={setSelectedEventType}
             onMediaTypeChange={setSelectedMediaType}
             onYearChange={setSelectedYear}
-            eventTypes={eventTypes || ''}
-            years={years || ''}
+            eventTypes={stats.eventTypes || ''}
+            years={stats.years || ''}
             totalItems={totalItems}
             filteredItems={filteredItems.length}
           />

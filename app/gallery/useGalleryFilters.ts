@@ -35,27 +35,5 @@ export function useGalleryFilters(
     })
   }, [items, searchQuery, selectedEventType, selectedMediaType, selectedYear])
 
-  const eventTypes = useMemo(() => {
-    return [
-      ...new Set(
-        items
-          .map((item) => item.context?.event_type)
-          .filter((v): v is string => Boolean(v))
-      ),
-    ].sort()
-  }, [items])
-
-  const years = useMemo(() => {
-    return [
-      ...new Set(
-        items
-          .map((item) => item.context?.year)
-          .filter((v): v is string => Boolean(v))
-      ),
-    ]
-      .sort()
-      .reverse()
-  }, [items])
-
-  return { filteredItems, eventTypes, years }
+  return { filteredItems }
 }
