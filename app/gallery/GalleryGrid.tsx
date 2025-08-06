@@ -10,6 +10,7 @@ import { GalleryHeader } from '../_components/GalleryUI/GalleryHeader'
 import SpinnerMini from '../_components/SpinnerMini'
 import { MediaItem } from './MediaItem'
 import { useGalleryMedia } from './useGalleryMedia'
+import { LoaderBar } from '../_components/GalleryUI/LoaderBar'
 
 export type MediaAsset = {
   public_id: string
@@ -90,7 +91,7 @@ export default function GalleryGrid({ stats }: Props) {
             filteredItems={items.length}
           />
         </div>
-
+        <LoaderBar loading={loading} />
         {/* Gallery Grid */}
         {items.length > 0 ? (
           <Masonry
