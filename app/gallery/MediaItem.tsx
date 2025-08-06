@@ -3,7 +3,6 @@
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { Calendar, Eye, Play, Users } from 'lucide-react'
 import { CldImage } from 'next-cloudinary'
-import { useState } from 'react'
 import { Badge } from '../_components/badge'
 import {
   Dialog,
@@ -35,8 +34,6 @@ export function MediaItem({
   views,
   attendees,
 }: MediaItemProps) {
-  const [isLoaded, setIsLoaded] = useState(false)
-
   return (
     <Dialog>
       <DialogTrigger asChild>

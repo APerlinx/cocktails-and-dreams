@@ -21,7 +21,7 @@ export type MediaAsset = {
     event_type?: string
     date?: string
     year?: string
-    attendees?: string
+    atendees?: string
   }
 }
 
@@ -162,9 +162,7 @@ export default function GalleryGrid({ stats }: Props) {
                     eventType={context.event_type || ''}
                     date={context.date || ''}
                     attendees={
-                      context.attendees
-                        ? parseInt(context.attendees)
-                        : undefined
+                      context.atendees ? parseInt(context.atendees) : undefined
                     }
                   />
                 </div>
