@@ -18,6 +18,10 @@ type GetCloudinaryMediaOptions = {
   folderName: string
   maxResults?: number
   nextCursor?: string
+  eventType?: string
+  mediaType?: string
+  year?: string
+  search?: string
 }
 
 {
@@ -27,8 +31,23 @@ export async function getCloudinaryMedia({
   folderName,
   maxResults = 20,
   nextCursor,
+  eventType,
+  mediaType,
+  year,
+  search,
 }: GetCloudinaryMediaOptions): Promise<CloudinarySearchResponse> {
-  const expression = `folder="${folderName}"`
+  let expression = `folder="${folderName}"`
+
+  if (eventType) expression += ` AND tags:${eventType}`
+  if (mediaType) {
+    expression = `resource_type:${mediaType} AND ${expression}`
+  }
+  if (year) expression += ` AND tags:${year}`
+
+  if (search) {
+    expression += ` AND (context.title:*${search}* OR filename:*${search}*)`
+  }
+  console.log('Cloudinary Search Expression:', expression)
 
   const res = await fetch(
     `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/resources/search`,

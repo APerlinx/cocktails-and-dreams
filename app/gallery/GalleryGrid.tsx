@@ -1,15 +1,15 @@
 'use client'
 
 import { ArrowDownCircle, Camera, Search } from 'lucide-react'
-import { useCallback, useEffect, useState } from 'react'
+import { useState } from 'react'
+import Masonry from 'react-masonry-css'
 import { GalleryFilters } from '../_components/GalleryFilters'
 import { Input } from '../_components/GalleryUI//input'
 import GalleryFooter from '../_components/GalleryUI/GalleryFooter'
 import { GalleryHeader } from '../_components/GalleryUI/GalleryHeader'
-import { MediaItem } from './MediaItem'
 import SpinnerMini from '../_components/SpinnerMini'
-import { useGalleryFilters } from './useGalleryFilters'
-import Masonry from 'react-masonry-css'
+import { MediaItem } from './MediaItem'
+import { useGalleryMedia } from './useGalleryMedia'
 
 export type MediaAsset = {
   public_id: string
@@ -44,64 +44,14 @@ export default function GalleryGrid({ stats }: Props) {
     null
   )
   const [selectedYear, setSelectedYear] = useState<string | null>(null)
-  const [items, setItems] = useState<MediaAsset[]>([])
-  const [cursor, setCursor] = useState<string | null>(null)
-  const [hasMore, setHasMore] = useState(true)
-  const [loading, setLoading] = useState(false)
-  const { filteredItems } = useGalleryFilters(
-    items,
-    searchQuery,
+
+  const { items, hasMore, loading, fetchMore } = useGalleryMedia({
     selectedEventType,
     selectedMediaType,
-    selectedYear
-  )
+    selectedYear,
+    searchQuery,
+  })
   const totalItems = stats.totalPhotos + stats.totalVideos
-
-  const fetchInitialMedia = async () => {
-    const res = await fetch(`/api/cloudinary?folder=gallery&max=20`)
-    const data = await res.json()
-    return data
-  }
-
-  useEffect(() => {
-    const loadInitial = async () => {
-      setLoading(true)
-      try {
-        const data = await fetchInitialMedia()
-        setItems(data.items)
-        setCursor(data.nextCursor)
-        setHasMore(data.hasMore)
-      } catch (err) {
-        console.error(err)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    loadInitial()
-  }, [])
-
-  const fetchMore = useCallback(async () => {
-    if (loading || !hasMore) return
-
-    setLoading(true)
-    try {
-      const res = await fetch(
-        `/api/cloudinary?folder=gallery&max=20${
-          cursor ? `&nextCursor=${cursor}` : ''
-        }`
-      )
-      const data = await res.json()
-
-      setItems((prev) => [...prev, ...data.items])
-      setCursor(data.nextCursor)
-      setHasMore(data.hasMore)
-    } catch (err) {
-      console.error(err)
-    } finally {
-      setLoading(false)
-    }
-  }, [cursor, hasMore, loading])
 
   return (
     <div className="min-h-screen bg-background">
@@ -137,18 +87,18 @@ export default function GalleryGrid({ stats }: Props) {
             eventTypes={stats.eventTypes || ''}
             years={stats.years || ''}
             totalItems={totalItems}
-            filteredItems={filteredItems.length}
+            filteredItems={items.length}
           />
         </div>
 
         {/* Gallery Grid */}
-        {filteredItems.length > 0 ? (
+        {items.length > 0 ? (
           <Masonry
             breakpointCols={{ default: 4, 1200: 3, 800: 2, 500: 1 }}
             className="my-masonry-grid"
             columnClassName="my-masonry-grid_column"
           >
-            {filteredItems.map((item) => {
+            {items.map((item) => {
               const context = item.context || {}
 
               return (
@@ -181,7 +131,7 @@ export default function GalleryGrid({ stats }: Props) {
           )
         )}
 
-        {hasMore && filteredItems.length > 0 && (
+        {hasMore && items.length > 0 && (
           <div
             className={`col-span-full flex justify-center py-8 ${
               !loading
