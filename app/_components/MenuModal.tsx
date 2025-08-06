@@ -53,7 +53,7 @@ const MenuModal: FC = () => {
 
   return (
     <div
-      className="bg-secondary border-2 border-card-2 rounded-lg fixed bottom-21 right-10 text-center z-[100] shadow-lg"
+      className="bg-secondary border-1 border-foreground rounded-lg fixed bottom-21 right-10 text-center p-2 z-[100] shadow-lg"
       ref={modalRef}
     >
       <div className="grid grid-cols-2 grid-rows-2">
@@ -69,9 +69,26 @@ const MenuModal: FC = () => {
             text-sm 
             hover:bg-primary/10
             focus-visible:outline-none
-            ${href === '/' ? 'border-b-1 border-r-1 border-card-2' : ''}
-            ${href === '/contact' ? 'border-b-1  border-card-2' : ''}
-            ${href === '/gallery' ? 'border-r-1  border-card-2' : ''}
+            ${
+              href === '/'
+                ? 'border-b-1 border-r-1 border-foreground/10 rounded-tl-md'
+                : ''
+            }
+            ${
+              href === '/contact'
+                ? 'border-b-1  border-foreground/10 rounded-tr-md'
+                : ''
+            }
+            ${
+              href === '/gallery'
+                ? 'border-r-1  border-foreground/10 rounded-bl-md'
+                : ''
+            }
+            ${
+              href === '/about'
+                ? 'border-r-1  border-foreground/10 rounded-br-md'
+                : ''
+            }
             ${pathname === href ? 'bg-primary/10' : ''}
           `}
           >
@@ -84,7 +101,7 @@ const MenuModal: FC = () => {
           </Link>
         ))}
       </div>
-      <code className="text-xs border-t-1 block border-primary/10  pt-2 text-primary px-2">
+      <code className="text-xs border-t-1 block border-primary/30  pt-2 text-primary/50 px-2">
         Website and design by Alon Perlin
       </code>
     </div>
