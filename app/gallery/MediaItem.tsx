@@ -41,7 +41,7 @@ export function MediaItem({
     <Dialog>
       <DialogTrigger asChild>
         <div className="group relative overflow-hidden cursor-pointer transition-transform duration-200">
-          <div className="relative h-full w-full overflow-hidden">
+          <div className="relative h-full w-full overflow-hidden ">
             {type === 'image' ? (
               <CldImage
                 src={src}
@@ -107,17 +107,17 @@ export function MediaItem({
         </div>
       </DialogTrigger>
 
-      <DialogContent className="max-w-4xl max-h-[90vh] p-0">
+      <DialogContent className="max-w-4xl max-h-[90vh] p-0 rounded-md">
         <VisuallyHidden>
           <DialogTitle>{title}</DialogTitle>
         </VisuallyHidden>
-        <div className="relative max-h-screen">
+        <div className="relative max-h-screen rounded-md">
           {type === 'video' ? (
             <video
               controls
               playsInline
               autoPlay
-              className="w-full h-auto object-contain cursor-pointer"
+              className="w-full h-auto object-contain cursor-pointer rounded-md"
             >
               <source src={videoSrc} type="video/mp4" />
               Your browser does not support the video tag.
@@ -126,7 +126,7 @@ export function MediaItem({
             <CldImage
               src={src}
               alt={title}
-              className="w-full h-auto object-contain"
+              className="w-full h-auto object-contain rounded-md"
               width={200}
               height={200}
               loading="lazy"
