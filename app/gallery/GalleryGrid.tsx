@@ -63,7 +63,7 @@ export default function GalleryGrid({ stats }: Props) {
         totalVideos={stats.totalVideos}
       />
       <div className="text-center">
-        <h2 className="font-bold text-destructivegit">
+        <h2 className="font-bold text-destructive">
           *The gallery page is under construction. Some features may not work as
           expected.*
         </h2>
