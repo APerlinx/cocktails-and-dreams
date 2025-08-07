@@ -62,7 +62,12 @@ export default function GalleryGrid({ stats }: Props) {
         totalPhotos={stats.totalPhotos}
         totalVideos={stats.totalVideos}
       />
-
+      <div className="text-center">
+        <h2 className="font-bold text-destructivegit">
+          *The gallery page is under construction. Some features may not work as
+          expected.*
+        </h2>
+      </div>
       <div className="container mx-auto px-4 py-12 max-w-7xl">
         {/* Search */}
         <div className="relative mb-8 max-w-md mx-auto">
