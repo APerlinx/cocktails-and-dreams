@@ -28,11 +28,11 @@
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --ring: oklch(0.708 0 0);
-  --card-1: oklch(92.4% 0.12 95.746 / 0.4);
-  --card-2: oklch(88.5% 0.062 18.334 / 0.4);
-  --card-3: oklch(88.2% 0.059 254.128 / 0.4);
-  --card-4: oklch(92.5% 0.084 155.995 / 0.4);
-  --card-5: oklch(0.769 0.188 70.08 / 0.4);
+  --card-1: oklch(92.4% 0.12 95.746 / 0.8);
+  --card-2: oklch(88.5% 0.062 18.334 / 0.8);
+  --card-3: oklch(88.2% 0.059 254.128 / 0.8);
+  --card-4: oklch(92.5% 0.084 155.995 / 0.8);
+  --card-5: oklch(0.769 0.188 70.08 / 0.8);
   --instagram-card: oklch(0.563 0.1907 350.4 / 0.8);
   --facebook-card: oklch(0.5364 0.2049 258.76 / 0.8);
   --whatsapp-card: oklch(62.7% 0.194 149.214 / 0.8);

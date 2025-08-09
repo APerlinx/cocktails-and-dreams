@@ -47,7 +47,6 @@ export async function getCloudinaryMedia({
   if (search) {
     expression += ` AND (context.title:*${search}* OR filename:*${search}*)`
   }
-  console.log('Cloudinary Search Expression:', expression)
 
   const res = await fetch(
     `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/resources/search`,
