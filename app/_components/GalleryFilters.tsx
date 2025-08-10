@@ -21,6 +21,7 @@ interface GalleryFiltersProps {
   years: string[]
   totalItems: number
   filteredItems: number
+  loading?: boolean
 }
 
 export function GalleryFilters({
@@ -34,6 +35,7 @@ export function GalleryFilters({
   years,
   totalItems,
   filteredItems,
+  loading = false,
 }: GalleryFiltersProps) {
   const hasActiveFilters =
     selectedEventType || selectedMediaType || selectedYear
@@ -66,6 +68,7 @@ export function GalleryFilters({
             <Select
               value={selectedEventType || 'all'}
               onValueChange={handleEventTypeChange}
+              disabled={loading}
             >
               <SelectTrigger className="w-full sm:w-48">
                 <SelectValue placeholder="All events" />
@@ -86,6 +89,7 @@ export function GalleryFilters({
             <Select
               value={selectedMediaType || 'all'}
               onValueChange={handleMediaTypeChange}
+              disabled={loading}
             >
               <SelectTrigger className="w-full sm:w-48">
                 <SelectValue placeholder="All media" />
@@ -113,6 +117,7 @@ export function GalleryFilters({
             <Select
               value={selectedYear || 'all'}
               onValueChange={handleYearChange}
+              disabled={loading}
             >
               <SelectTrigger className="w-full sm:w-32">
                 <SelectValue placeholder="All years" />

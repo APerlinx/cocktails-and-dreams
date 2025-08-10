@@ -89,6 +89,7 @@ export default function GalleryGrid({ stats }: Props) {
             years={stats.years || ''}
             totalItems={totalItems}
             filteredItems={items.length}
+            loading={loading}
           />
         </div>
         <LoaderBar loading={loading} />
