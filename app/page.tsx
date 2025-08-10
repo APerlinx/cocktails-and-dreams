@@ -17,6 +17,9 @@ export default async function Home() {
               muted
               playsInline
               className="absolute top-0 left-0 w-full h-full object-cover z-[-1]"
+              controls={false}
+              disablePictureInPicture
+              preload="metadata"
             >
               <source src={videoBg[0].url} type="video/mp4" />
             </video>
