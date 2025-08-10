@@ -119,6 +119,7 @@ export default function Content({ media }: AboutImagesProps) {
                     alt="Cover"
                     fill
                     className="object-cover w-full h-full"
+                    loading="lazy"
                   />
                 )}
               </div>
@@ -165,6 +166,7 @@ export default function Content({ media }: AboutImagesProps) {
                       width={192}
                       height={192}
                       className="w-full h-full object-cover"
+                      loading="lazy"
                     />
                   )}
                 </div>
@@ -195,6 +197,7 @@ export default function Content({ media }: AboutImagesProps) {
                       width={192}
                       height={192}
                       className="w-full h-full object-cover"
+                      loading="lazy"
                     />
                   )}
                 </div>

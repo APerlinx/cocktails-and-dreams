@@ -83,6 +83,7 @@ export default function Cards() {
               src="/logo-notext.svg"
               height={90}
               width={90}
+              loading="lazy"
               alt="logo of cocktails and dreams"
             />
             <h2 className="text-2xl font-bold text-primary tracking-tight">

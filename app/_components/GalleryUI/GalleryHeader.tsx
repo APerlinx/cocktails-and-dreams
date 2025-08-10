@@ -28,7 +28,7 @@ const statsData = [
   {
     label: 'Total Views',
     icon: Users,
-    getValue: (props: GalleryHeaderProps) => props.totalPhotos * 100, // or whatever formula
+    getValue: (props: GalleryHeaderProps) => props.totalPhotos * 103,
   },
 ]
 
@@ -50,7 +50,7 @@ export function GalleryHeader(props: GalleryHeaderProps) {
 
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {statsData.map(({ label, icon: Icon, getValue }, idx) => (
+          {statsData.map(({ label, icon: Icon, getValue }) => (
             <Card className="text-center marble-bg-2" key={label}>
               <CardContent className="pt-4">
                 <Icon className="h-6 w-6 text-primary mx-auto mb-2" />
