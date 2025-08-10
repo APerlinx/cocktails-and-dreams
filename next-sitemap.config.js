@@ -1,0 +1,6 @@
+/** @type {import('next-sitemap').IConfig} */
+module.exports = {
+  siteUrl: 'https://www.cocktailsndreams.art',
+  generateRobotsTxt: true,
+  sitemapSize: 5000,
+}
