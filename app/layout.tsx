@@ -21,14 +21,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Cocktails and dreams',
     description: 'Active bar with cocktails specialty',
-    url: 'www.cocktailsndreams.art',
+    url: 'https://www.cocktailsndreams.art',
     siteName: 'Cocktails & Dreams',
     images: [
       {
-        url: '/logo.png',
+        url: 'https://res.cloudinary.com/dlvlvj00u/image/upload/v1754298988/main_hyzm8z.jpg',
         width: 1200,
         height: 630,
-        alt: 'Cocktail bar preview',
+        alt: 'Cocktails & Dreams event preview',
       },
     ],
     type: 'website',
