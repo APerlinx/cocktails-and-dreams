@@ -74,7 +74,7 @@ export function GalleryFilters({
                 <SelectValue placeholder="All events" />
               </SelectTrigger>
               <SelectContent dir="rtl">
-                <SelectItem value="all">כול האירועים</SelectItem>
+                <SelectItem value="all">All events</SelectItem>
                 {eventTypes.map((type) => (
                   <SelectItem key={type} value={type}>
                     {type}
