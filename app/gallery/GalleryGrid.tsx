@@ -93,7 +93,7 @@ export default function GalleryGrid({ stats }: Props) {
         </div>
         <LoaderBar loading={loading} />
         {/* Gallery Grid */}
-        {items.length > 0 ? (
+        {items && items.length > 0 ? (
           <Masonry
             breakpointCols={{ default: 4, 1200: 3, 800: 2, 500: 1 }}
             className="my-masonry-grid"
@@ -132,7 +132,7 @@ export default function GalleryGrid({ stats }: Props) {
           )
         )}
 
-        {hasMore && items.length > 0 && (
+        {hasMore && items && items.length > 0 && (
           <div
             className={`col-span-full flex justify-center py-8 ${
               !loading

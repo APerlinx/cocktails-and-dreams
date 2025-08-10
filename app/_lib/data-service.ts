@@ -1,3 +1,5 @@
+import { sanitizeSearch } from '../utils/utils'
+
 type CloudinaryMediaItem = {
   public_id: string
   filename: string
@@ -45,7 +47,12 @@ export async function getCloudinaryMedia({
   if (year) expression += ` AND tags:${year}`
 
   if (search) {
-    expression += ` AND (context.title:*${search}* OR filename:*${search}*)`
+    const safeSearch = sanitizeSearch(search)
+    expression += ` AND (
+    context.title:${safeSearch}* 
+    OR context.event_type:${safeSearch}*
+    OR context.year:${safeSearch}*
+    )`
   }
 
   const res = await fetch(
@@ -68,7 +75,11 @@ export async function getCloudinaryMedia({
     }
   )
 
-  if (!res.ok) throw new Error('Failed to fetch Cloudinary media')
+  if (!res.ok) {
+    const errorText = await res.text()
+    console.error('Cloudinary fetch error:', errorText)
+    throw new Error('Failed to fetch Cloudinary media')
+  }
 
   return await res.json()
 }
