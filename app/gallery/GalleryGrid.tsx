@@ -1,16 +1,18 @@
 'use client'
 
 import { ArrowDownCircle, Camera, Search } from 'lucide-react'
+import dynamic from 'next/dynamic'
 import { useState } from 'react'
-import Masonry from 'react-masonry-css'
 import { GalleryFilters } from '../_components/GalleryFilters'
 import { Input } from '../_components/GalleryUI//input'
 import GalleryFooter from '../_components/GalleryUI/GalleryFooter'
 import { GalleryHeader } from '../_components/GalleryUI/GalleryHeader'
-import SpinnerMini from '../_components/SpinnerMini'
-import { MediaItem } from './MediaItem'
-import { useGalleryMedia } from './useGalleryMedia'
 import { LoaderBar } from '../_components/GalleryUI/LoaderBar'
+import { SearchSpinner } from '../_components/SearchSpinner'
+import SpinnerMini from '../_components/SpinnerMini'
+import { useGalleryMedia } from './useGalleryMedia'
+const MediaItem = dynamic(() => import('./MediaItem'), { ssr: false })
+const Masonry = dynamic(() => import('react-masonry-css'), { ssr: false })
 
 export type MediaAsset = {
   public_id: string
@@ -66,7 +68,11 @@ export default function GalleryGrid({ stats }: Props) {
       <div className="container mx-auto px-4 py-12 max-w-7xl">
         {/* Search */}
         <div className="relative mb-8 max-w-md mx-auto">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          {loading ? (
+            <SearchSpinner className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          ) : (
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          )}
           <Input
             type="text"
             placeholder="Search events, photos, videos..."
@@ -100,7 +106,7 @@ export default function GalleryGrid({ stats }: Props) {
             className="my-masonry-grid"
             columnClassName="my-masonry-grid_column"
           >
-            {items.map((item) => {
+            {items.map((item, index) => {
               const context = item.context || {}
 
               return (
@@ -116,6 +122,7 @@ export default function GalleryGrid({ stats }: Props) {
                     attendees={
                       context.atendees ? parseInt(context.atendees) : undefined
                     }
+                    priority={index < 4}
                   />
                 </div>
               )

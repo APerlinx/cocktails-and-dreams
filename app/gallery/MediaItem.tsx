@@ -1,7 +1,7 @@
 'use client'
 
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
-import { Calendar, Eye, Play, Users } from 'lucide-react'
+import { Calendar, Eye, Loader2, Play, Users } from 'lucide-react'
 import { CldImage } from 'next-cloudinary'
 import { Badge } from '../_components/badge'
 import {
@@ -10,6 +10,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '../_components/GalleryUI/dialog'
+import SpinnerMini from '../_components/SpinnerMini'
+import { useState } from 'react'
 
 interface MediaItemProps {
   id: string
@@ -21,9 +23,10 @@ interface MediaItemProps {
   date: string
   views?: number
   attendees?: number
+  priority?: boolean
 }
 
-export function MediaItem({
+export default function MediaItem({
   id,
   type,
   src,
@@ -33,7 +36,13 @@ export function MediaItem({
   date,
   views,
   attendees,
+  priority,
 }: MediaItemProps) {
+  const imgLoadingMode: 'lazy' | 'eager' | undefined = priority
+    ? undefined
+    : 'lazy'
+  const [imgLoaded, setImgLoaded] = useState(false)
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -44,11 +53,13 @@ export function MediaItem({
                 src={src}
                 alt={title}
                 className="object-cover w-full h-full aspect-square"
-                width={100}
-                height={100}
-                loading="lazy"
-                placeholder="blur"
-                blurDataURL={src}
+                width={800}
+                height={800}
+                loading={imgLoadingMode}
+                priority={priority}
+                quality="auto:good"
+                format="auto"
+                dpr="auto"
               />
             ) : (
               <div className="relative w-full h-full overflow-hidden">
@@ -115,6 +126,11 @@ export function MediaItem({
           <DialogTitle>{title}</DialogTitle>
         </VisuallyHidden>
         <div className="relative max-h-screen rounded-md">
+          {!imgLoaded && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+              <Loader2 className="animate-spin h-8 w-8 text-white" />
+            </div>
+          )}
           {type === 'video' ? (
             <video
               controls
@@ -130,15 +146,21 @@ export function MediaItem({
               src={src}
               alt={title}
               className="w-full h-auto object-contain rounded-md"
-              width={200}
-              height={200}
-              loading="lazy"
-              placeholder="blur"
-              blurDataURL={videoSrc}
+              width={1600}
+              height={1600}
+              loading="eager"
+              priority
+              format="auto"
+              quality="auto:best"
+              dpr="auto"
+              onLoad={() => setImgLoaded(true)}
             />
           )}
 
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white">
+          <div
+            className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white"
+            dir="rtl"
+          >
             <h2 className="text-xl mb-2">{title}</h2>
             <div className="flex items-center gap-4 text-sm text-white/80">
               <Badge variant="outline" className="border-white/40 text-white">
@@ -151,7 +173,7 @@ export function MediaItem({
               {attendees && (
                 <div className="flex items-center gap-1">
                   <Users className="h-4 w-4" />
-                  <span>{attendees} attendees</span>
+                  <span>{attendees} אורחים</span>
                 </div>
               )}
             </div>
