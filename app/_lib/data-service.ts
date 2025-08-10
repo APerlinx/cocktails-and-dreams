@@ -38,27 +38,36 @@ export async function getCloudinaryMedia({
   year,
   search,
 }: GetCloudinaryMediaOptions): Promise<CloudinarySearchResponse> {
+  const clampedMax = Math.min(Math.max(maxResults, 1), 50)
+  const mediaTypeSafe =
+    mediaType === 'image' || mediaType === 'video' ? mediaType : undefined
+
   let expression = `folder="${folderName}"`
 
   if (eventType) expression += ` AND tags:${eventType}`
-  if (mediaType) {
-    expression = `resource_type:${mediaType} AND ${expression}`
-  }
+  if (mediaTypeSafe)
+    expression = `resource_type:${mediaTypeSafe} AND ${expression}`
   if (year) expression += ` AND tags:${year}`
 
   if (search) {
     const safeSearch = sanitizeSearch(search)
     expression += ` AND (
-    context.title:${safeSearch}* 
-    OR context.event_type:${safeSearch}*
-    OR context.year:${safeSearch}*
+      context.title:${safeSearch}*
+      OR context.event_type:${safeSearch}*
+      OR context.year:${safeSearch}*
     )`
   }
+
+  console.log('Cloudinary Search Expression:', expression)
+
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 10_000)
 
   const res = await fetch(
     `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/resources/search`,
     {
       method: 'POST',
+      signal: controller.signal,
       headers: {
         Authorization: `Basic ${Buffer.from(
           `${process.env.CLOUDINARY_API_KEY}:${process.env.CLOUDINARY_API_SECRET}`
@@ -67,21 +76,31 @@ export async function getCloudinaryMedia({
       },
       body: JSON.stringify({
         expression,
-        max_results: maxResults,
+        max_results: clampedMax,
         with_field: 'context',
         next_cursor: nextCursor,
         sort_by: [{ created_at: 'desc' }],
       }),
     }
-  )
+  ).catch((err) => {
+    clearTimeout(timeout)
+    console.error('Cloudinary fetch crashed:', err?.message)
+    throw new Error('Failed to reach Cloudinary')
+  })
+
+  clearTimeout(timeout)
 
   if (!res.ok) {
     const errorText = await res.text()
-    console.error('Cloudinary fetch error:', errorText)
+    console.error('Cloudinary fetch error:', {
+      status: res.status,
+      expression,
+      errorText,
+    })
     throw new Error('Failed to fetch Cloudinary media')
   }
 
-  return await res.json()
+  return (await res.json()) as CloudinarySearchResponse
 }
 
 {
