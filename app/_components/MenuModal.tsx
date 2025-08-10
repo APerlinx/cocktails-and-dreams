@@ -84,11 +84,7 @@ const MenuModal: FC = () => {
                 ? 'border-r-1  border-foreground/10 rounded-bl-md'
                 : ''
             }
-            ${
-              href === '/about'
-                ? 'border-r-1  border-foreground/10 rounded-br-md'
-                : ''
-            }
+            ${href === '/about' ? ' rounded-br-md' : ''}
             ${pathname === href ? 'bg-primary/10' : ''}
           `}
           >
