@@ -1,18 +1,17 @@
 'use client'
 
+import {
+  Home,
+  MessageCircleMore,
+  MessageCircleQuestionMark,
+  Triangle,
+} from 'lucide-react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { FC, useEffect, useRef, useState } from 'react'
 import { useModal } from '../context/MenuContext'
 import { useClickOutside } from '../hooks/useClickOutside'
 import SpinnerMini from './SpinnerMini'
-import {
-  Home,
-  MessageCircleMore,
-  GalleryVerticalEnd,
-  MessageCircleQuestionMark,
-  Triangle,
-} from 'lucide-react'
 
 const MenuModal: FC = () => {
   const pathname = usePathname()

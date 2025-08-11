@@ -1,9 +1,8 @@
 'use client'
 
-import Image from 'next/image'
+import { Martini } from 'lucide-react'
 import { FC } from 'react'
 import { useModal } from '../context/MenuContext'
-import { Martini } from 'lucide-react'
 
 const MenuCircle: FC = () => {
   const { toggleMenu } = useModal()

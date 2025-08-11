@@ -6,15 +6,9 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function sanitizeSearch(input: string): string {
-  return (
-    input
-      // Remove Cloudinary special/reserved chars that can break the query
-      .replace(/[!(){}\[\]^~?:\\=&><*]/g, '')
-      // Remove any arrow icons or other weird glyphs
-      .replace(/[\u27A4-\u27AF]/g, '')
-      // Remove quotes
-      .replace(/["']/g, '')
-      // Trim whitespace
-      .trim()
-  )
+  return input
+    .replace(/[!(){}\[\]^~?:\\=&><*]/g, '')
+    .replace(/[\u27A4-\u27AF]/g, '')
+    .replace(/["']/g, '')
+    .trim()
 }
