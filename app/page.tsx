@@ -33,7 +33,7 @@ export default async function Home() {
             alt="Cocktails&dream logo"
             width={200}
             height={200}
-            priority
+            fetchPriority="high"
           />
 
           <div className="flex gap-4 items-center flex-row">
