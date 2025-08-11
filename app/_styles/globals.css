@@ -1,67 +1,104 @@
+/* Tailwind (v4 style) */
 @import 'tailwindcss';
-@custom-variant dark (&:is(.dark *));
 
+/* ---------- Tokens (keep only what you use) ---------- */
 :root {
   --vh: 100%;
   --font-size: 14px;
+
   --background: #ffffff;
   --foreground: oklch(0.145 0 0);
+
   --card: #ffffff;
   --card-foreground: oklch(0.145 0 0);
+
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
+
   --primary: #030213;
   --primary-foreground: oklch(1 0 0);
   --primary-circle-btn: rgba(0, 0, 0, 0.8);
+
   --secondary: oklch(0.95 0.0058 264.53);
   --secondary-foreground: #030213;
+
   --muted: #ececf0;
   --muted-foreground: #717182;
+
   --accent: #e9ebef;
   --accent-foreground: #030213;
+
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
+
   --border: rgba(0, 0, 0, 0.1);
-  --input: transparent;
+  --input: #71718252;
   --input-background: #f3f3f5;
   --switch-background: #cbced4;
+
   --font-weight-medium: 500;
   --font-weight-normal: 400;
+
   --ring: oklch(0.708 0 0);
+
+  /* cards you use in Home */
   --card-1: oklch(92.4% 0.12 95.746 / 0.8);
   --card-2: oklch(88.5% 0.062 18.334 / 0.8);
   --card-3: oklch(88.2% 0.059 254.128 / 0.8);
   --card-4: oklch(92.5% 0.084 155.995 / 0.8);
   --card-5: oklch(0.769 0.188 70.08 / 0.8);
+
   --instagram-card: oklch(0.563 0.1907 350.4 / 0.8);
   --facebook-card: oklch(0.5364 0.2049 258.76 / 0.8);
   --whatsapp-card: oklch(62.7% 0.194 149.214 / 0.8);
   --phone-card: oklch(0.1074 0.0447 280.7 / 0.8);
+
   --instagram-card-hover: oklch(0.563 0.1907 350.4);
   --facebook-card-hover: oklch(0.5364 0.2049 258.76);
   --whatsapp-card-hover: oklch(62.7% 0.194 149.214);
   --phone-card-hover: oklch(0.1074 0.0447 280.7);
+
   --radius: 0.625rem;
 }
 
+/* Optional: class-based dark scheme (faster & explicit) */
+.dark {
+  --background: #0b0b0b;
+  --foreground: oklch(0.96 0 0);
+  --border: rgba(255, 255, 255, 0.14);
+  --muted: #2b2b2f;
+  --muted-foreground: #a9a9b4;
+  --accent: #1b1b1f;
+  --accent-foreground: #e8e8ea;
+}
+
+/* Viewport height fix (mobile browsers) */
 .mobile-vh-fix {
   height: calc(var(--vh, 1vh) * 100);
 }
+
+/* ---------- Base (keep minimal!) ---------- */
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+  *,
+  *::before,
+  *::after {
+    @apply border-border;
+  }
+  html {
+    font-size: var(--font-size);
   }
 
+  /* The font family comes from next/font via <html className=...>, so don't override it here. */
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
   }
 }
 
+/* Map tokens to Tailwind theme variables (Tailwind v4 inline theme) */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
@@ -81,11 +118,13 @@
   --color-input-background: var(--input-background);
   --color-switch-background: var(--switch-background);
   --color-ring: var(--ring);
+
   --color-card-1: var(--card-1);
   --color-card-2: var(--card-2);
   --color-card-3: var(--card-3);
   --color-card-4: var(--card-4);
   --color-card-5: var(--card-5);
+
   --color-instagram-card: var(--instagram-card);
   --color-facebook-card: var(--facebook-card);
   --color-whatsapp-card: var(--whatsapp-card);
@@ -94,19 +133,14 @@
   --color-facebook-card-hover: var(--facebook-card-hover);
   --color-whatsapp-card-hover: var(--whatsapp-card-hover);
   --color-phone-card-hover: var(--phone-card-hover);
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #ffffff;
-    --foreground: oklch(0.145 0 0);
-  }
-}
-
+/* ---------- Components (safe to keep here) ---------- */
 @layer components {
   .spinner {
     margin: 3.2rem auto 1.6rem;
@@ -117,7 +151,6 @@
     border-right-color: #262626;
     animation: rotate 1s infinite linear;
   }
-
   .spinner-mini {
     margin: 0;
     width: 20px;
@@ -127,7 +160,6 @@
     border-right-color: transparent;
     animation: rotate 1s infinite linear;
   }
-
   @keyframes rotate {
     to {
       transform: rotate(1turn);
@@ -135,100 +167,36 @@
   }
 }
 
-@layer base {
-  :where(:not(:has([class*=' text-']), :not(:has([class^='text-'])))) {
-    h1 {
-      font-size: var(--text-2xl);
-      font-weight: var(--font-weight-medium);
-      line-height: 1.5;
-    }
-
-    h2 {
-      font-size: var(--text-xl);
-      font-weight: var(--font-weight-medium);
-      line-height: 1.5;
-    }
-
-    h3 {
-      font-size: var(--text-lg);
-      font-weight: var(--font-weight-medium);
-      line-height: 1.5;
-    }
-
-    h4 {
-      font-size: var(--text-base);
-      font-weight: var(--font-weight-medium);
-      line-height: 1.5;
-    }
-
-    p {
-      font-size: var(--text-base);
-      font-weight: var(--font-weight-normal);
-      line-height: 1.5;
-    }
-
-    label {
-      font-size: var(--text-base);
-      font-weight: var(--font-weight-medium);
-      line-height: 1.5;
-    }
-
-    button {
-      font-size: var(--text-base);
-      font-weight: var(--font-weight-medium);
-      line-height: 1.5;
-    }
-
-    input {
-      font-size: var(--text-base);
-      font-weight: var(--font-weight-normal);
-      line-height: 1.5;
-    }
+/* ---------- Utilities (non-blocking, optional) ---------- */
+@layer utilities {
+  /* Masonry lib hooks */
+  .my-masonry-grid {
+    display: flex;
+    margin-left: -8px;
+    width: auto;
   }
-}
+  .my-masonry-grid_column {
+    padding-left: 8px;
+    background-clip: padding-box;
+  }
+  .my-masonry-grid_column > div {
+    margin-bottom: 8px;
+  }
 
-html {
-  font-size: var(--font-size);
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-  overflow-x: hidden;
-}
-
-/* Gallery Grid ( masonry lib ) */
-.my-masonry-grid {
-  display: flex;
-  margin-left: -8px;
-  width: auto;
-}
-.my-masonry-grid_column {
-  padding-left: 8px;
-  background-clip: padding-box;
-}
-
-.my-masonry-grid_column > div {
-  margin-bottom: 8px;
-}
-
-/* Marble cards - Background */
-.marble-bg {
-  background-image: url('/marble.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.marble-bg-2 {
-  background-image: url('/marble-2.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-/* Bussiness card - Background */
-.circle-bg {
-  background-image: url('/circle-scatter-light.svg');
-  background-size: cover;
-  background-position: center;
+  /* Image backgrounds (avoid using above the fold) */
+  .marble-bg {
+    background-image: url('/marble.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  .marble-bg-2 {
+    background-image: url('/marble-2.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  .circle-bg {
+    background-image: url('/circle-scatter-light.svg');
+    background-size: cover;
+    background-position: center;
+  }
 }

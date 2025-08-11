@@ -63,8 +63,8 @@ export function GalleryFilters({
       {/* Filter Controls */}
       <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
         <div className="flex flex-col sm:flex-row gap-4 flex-1">
-          <div className="space-y-2">
-            <label className="text-sm">Event Type:</label>
+          <div className="space-y-2 ">
+            <label className="text-sm ">Event Type:</label>
             <Select
               value={selectedEventType || 'all'}
               onValueChange={handleEventTypeChange}

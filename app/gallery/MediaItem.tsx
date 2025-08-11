@@ -103,7 +103,7 @@ export default function MediaItem({
             <div className="absolute top-2 left-2">
               <Badge
                 variant="secondary"
-                className={`text-xs  text-foreground ${
+                className={`text-xs text-foreground ${
                   eventType === 'פרטי'
                     ? 'bg-card-2'
                     : eventType === 'עסקי'

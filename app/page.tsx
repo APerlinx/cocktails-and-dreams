@@ -39,10 +39,10 @@ export default async function Home() {
           <div className="flex gap-4 items-center flex-row">
             <NavigateButton
               href="/gallery"
-              className=" bg-foreground/80 text-background hover:bg-[#383838] dark:hover:bg-[#ccc]"
+              className=" bg-foreground/80 text-background hover:bg-[#383838] "
             >
               <Image
-                className="dark:invert"
+                className="text-background"
                 src="/triangle.svg"
                 alt="triangle"
                 width={20}
@@ -53,7 +53,7 @@ export default async function Home() {
 
             <NavigateButton
               href="/contact"
-              className="bg-background/80 border-black/[.08] dark:border-white/[.145] transition-colors  hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent h-12 px-5 w-full sm:w-auto md:w-[158px]"
+              className="bg-background/80 border-black/[.08]  transition-colors  hover:bg-[#f2f2f2] hover:border-transparent h-12 px-5 w-full sm:w-auto md:w-[158px]"
             >
               Contact us
             </NavigateButton>
