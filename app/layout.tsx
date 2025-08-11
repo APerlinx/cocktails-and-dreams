@@ -1,18 +1,17 @@
+import { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
+import { ReactNode } from 'react'
+import MenuModal from './_components/MenuModal'
 import './_styles/globals.css'
 import { ModalProvider } from './context/MenuContext'
-import MenuModal from './_components/MenuModal'
-import { ReactNode } from 'react'
-import { Metadata } from 'next'
 
 const geistSans = Geist({
-  variable: '--font-geist-sans',
   subsets: ['latin'],
+  display: 'swap',
 })
-
 const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
   subsets: ['latin'],
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
@@ -44,11 +43,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://res.cloudinary.com" />
-        <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className="antialiased">
         <ModalProvider>
           {children} <MenuModal />
         </ModalProvider>
