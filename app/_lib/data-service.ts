@@ -58,8 +58,6 @@ export async function getCloudinaryMedia({
     )`
   }
 
-  console.log('Cloudinary Search Expression:', expression)
-
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 10_000)
 

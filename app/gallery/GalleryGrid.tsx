@@ -18,7 +18,7 @@ export type MediaAsset = {
   public_id: string
   resource_type: 'image' | 'video'
   filename: string
-  url?: string
+  secure_url: string
   context?: {
     title?: string
     event_type?: string
@@ -112,10 +112,9 @@ export default function GalleryGrid({ stats }: Props) {
               return (
                 <div key={item.public_id} className="break-inside-avoid">
                   <MediaItem
-                    id={item.public_id}
                     type={item.resource_type}
                     src={item.public_id}
-                    videoSrc={(item.url || '') as string}
+                    videoSrc={(item.secure_url || '') as string}
                     title={context.title || item.filename}
                     eventType={context.event_type || ''}
                     date={context.date || ''}

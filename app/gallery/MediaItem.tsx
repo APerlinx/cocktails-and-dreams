@@ -3,6 +3,7 @@
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { Calendar, Eye, Loader2, Play, Users } from 'lucide-react'
 import { CldImage } from 'next-cloudinary'
+import { useState } from 'react'
 import { Badge } from '../_components/badge'
 import {
   Dialog,
@@ -10,11 +11,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '../_components/GalleryUI/dialog'
-import SpinnerMini from '../_components/SpinnerMini'
-import { useState } from 'react'
 
 interface MediaItemProps {
-  id: string
   type: 'image' | 'video'
   src: string
   videoSrc: string
@@ -27,7 +25,6 @@ interface MediaItemProps {
 }
 
 export default function MediaItem({
-  id,
   type,
   src,
   videoSrc,
