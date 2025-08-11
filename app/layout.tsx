@@ -1,18 +1,8 @@
 import { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
 import { ReactNode } from 'react'
 import MenuModal from './_components/MenuModal'
 import './_styles/globals.css'
 import { ModalProvider } from './context/MenuContext'
-
-const geistSans = Geist({
-  subsets: ['latin'],
-  display: 'swap',
-})
-const geistMono = Geist_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-})
 
 export const metadata: Metadata = {
   title: 'Cocktails and dreams',
