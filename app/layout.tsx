@@ -5,22 +5,38 @@ import './_styles/globals.css'
 import { ModalProvider } from './context/MenuContext'
 
 export const metadata: Metadata = {
-  title: 'Cocktails and dreams',
-  description: 'Cocktails and dreams website',
+  metadataBase: new URL('https://www.cocktailsndreams.art'),
+  title: {
+    default: 'בר אקטיבי לאירועים | קוקטיילס אנד דרימס',
+    template: '%s | קוקטיילס אנד דרימס',
+  },
+  description:
+    'בר קוקטיילים לאירועים פרטיים ועסקיים, סדנאות קוקטיילים ושירותי בר בכל הארץ.',
+
   openGraph: {
-    title: 'Cocktails and dreams',
-    description: 'Active bar with cocktails specialty',
+    type: 'website',
+    locale: 'he_IL',
+    siteName: 'קוקטיילס אנד דרימס',
+    title: 'בר קוקטיילים לאירועים | קוקטיילס אנד דרימס',
+    description: 'בר קוקטיילים לאירועים, סדנאות קוקטיילים ושירותי בר בכל הארץ.',
     url: 'https://www.cocktailsndreams.art',
-    siteName: 'Cocktails & Dreams',
     images: [
       {
         url: 'https://res.cloudinary.com/dlvlvj00u/image/upload/v1754298988/main_hyzm8z.jpg',
         width: 1200,
         height: 630,
-        alt: 'Cocktails & Dreams event preview',
+        alt: 'קוקטיילס אנד דרימס — תצוגה מקדימה לאירוע',
       },
     ],
-    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'בר קוקטיילים לאירועים | קוקטיילס אנד דרימס',
+    description:
+      'סדנאות קוקטיילים ושירותי בר לאירועים פרטיים ועסקיים בכל הארץ.',
+    images: [
+      'https://res.cloudinary.com/dlvlvj00u/image/upload/v1754298988/main_hyzm8z.jpg',
+    ],
   },
 }
 
