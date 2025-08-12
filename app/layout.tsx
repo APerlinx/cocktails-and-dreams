@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { ReactNode } from 'react'
-import MenuModal from './_components/MenuModal'
+import LazyMenuModal from './_components/LazyMenuModal'
 import './_styles/globals.css'
 import { ModalProvider } from './context/MenuContext'
 
@@ -52,7 +52,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
       </head>
       <body className="antialiased">
         <ModalProvider>
-          {children} <MenuModal />
+          {children}
+          <LazyMenuModal />
         </ModalProvider>
       </body>
     </html>

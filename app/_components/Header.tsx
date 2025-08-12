@@ -3,7 +3,6 @@
 import { usePathname } from 'next/navigation'
 import { ReactElement } from 'react'
 import BackButton from './BackButton'
-import { FileQuestionMark, GalleryThumbnails } from 'lucide-react'
 
 function Header(): ReactElement | null {
   const pathname = usePathname()
