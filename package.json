@@ -35,5 +35,20 @@
     "eslint-config-next": "15.4.2",
     "tailwindcss": "^4",
     "typescript": "^5.8.3"
+  },
+  "browserslist": {
+    "production": [
+      "defaults and supports es6-module",
+      "not dead",
+      "not op_mini all",
+      "not ie <= 11",
+      "not safari < 15.4",
+      "not ios_saf < 15.4"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
