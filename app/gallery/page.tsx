@@ -4,7 +4,7 @@ import { getStaticMediaStats } from '../_lib/data-service'
 import GalleryGrid from './GalleryGrid'
 
 export const metadata = {
-  title: 'Gallery – Cocktails & Dreams',
+  title: 'גלריה',
   description: 'Browse our collection of cocktails, events, and party photos.',
 }
 

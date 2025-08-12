@@ -7,8 +7,8 @@ import { ModalProvider } from './context/MenuContext'
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.cocktailsndreams.art'),
   title: {
-    default: 'בר אקטיבי לאירועים | קוקטיילס אנד דרימס',
-    template: '%s | קוקטיילס אנד דרימס',
+    default: 'בר אקטיבי לאירועים | Cocktails & Dreams',
+    template: '%s | Cocktails & Dreams',
   },
   description:
     'בר קוקטיילים לאירועים פרטיים ועסקיים, סדנאות קוקטיילים ושירותי בר בכל הארץ.',

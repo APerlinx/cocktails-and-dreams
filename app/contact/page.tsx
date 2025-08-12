@@ -3,7 +3,7 @@ import Header from '../_components/Header'
 import Cards from './Cards'
 
 export const metadata = {
-  title: 'Contact – Cocktails & Dreams',
+  title: 'צור קשר',
   description: 'Conctact us for inquiries, reservations, or feedback.',
 }
 

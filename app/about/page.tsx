@@ -5,7 +5,7 @@ import { getStaticMedia } from '../_lib/data-service'
 import Content from './Content'
 
 export const metadata = {
-  title: 'About – Cocktails & Dreams',
+  title: 'עלינו',
   description: 'Get to know about or journey.',
 }
 

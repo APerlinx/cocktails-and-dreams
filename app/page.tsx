@@ -29,7 +29,7 @@ export default async function Home() {
 
           <Image
             className="self-center"
-            src="/logo.svg"
+            src="https://res.cloudinary.com/dlvlvj00u/image/upload/v1754993623/logo_pgorvi.svg"
             alt="Cocktails&dream logo"
             width={200}
             height={200}
