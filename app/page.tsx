@@ -20,6 +20,7 @@ export default async function Home() {
               controls={false}
               disablePictureInPicture
               preload="metadata"
+              crossOrigin="anonymous"
             >
               <source src={videoBg[0].url} type="video/mp4" />
             </video>
@@ -34,6 +35,7 @@ export default async function Home() {
             width={200}
             height={200}
             fetchPriority="high"
+            crossOrigin="anonymous"
           />
 
           <div className="flex gap-4 items-center flex-row">
