@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Cocktails & Dreams
 
-## Getting Started
+**Live:** [https://www.cocktailsndreams.art](https://www.cocktailsndreams.art)
 
-First, run the development server:
+A fast, responsive marketing site for an active cocktail bar, built with **Next.js (App Router) + TypeScript + Tailwind CSS**. Hebrew-first (RTL), SEO-minded, and designed for quick LCP.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## What it is
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+A production website for a real business. Focused on clear CTAs (WhatsApp/phone), strong visual identity, and smooth mobile UX.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## My role & scope
 
-To learn more about Next.js, take a look at the following resources:
+* End‑to‑end design & development
+* Deployment and ongoing optimization (Vercel)
+* Content structure, metadata, and accessibility polish
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Highlights
 
-## Deploy on Vercel
+* **RTL Hebrew**: typography, spacing, and layout tuned for right‑to‑left.
+* **App Router + TS**: server components where sensible, clean route structure.
+* **Media performance**: `next/image` for responsive images; background video is lazy and non‑blocking.
+* **SEO foundations**: Metadata API, OpenGraph, canonical URL; per‑page titles/descriptions.
+* **Accessible by default**: focus styles, keyboard nav, contrast checks.
+* **Secure media fetching**: gallery content comes via server endpoints (no client‑side secrets).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Key pages
+
+* **Home** – hero media, service highlights, primary CTAs
+* **Gallery** – responsive grid with hover states
+* **Workshops/Services** – clear offer and contact paths
+* **Contact** – WhatsApp/phone/email with proper semantics
+
+---
+
+## Tech
+
+* **Framework:** Next.js 14 (App Router)
+* **Language:** TypeScript
+* **Styling:** Tailwind CSS
+* **Fonts:** `next/font` (Geist)
+* **Icons:** lucide-react
+* **Hosting:** Vercel
+
+---
+
+## Performance & SEO notes
+
+* Optimized hero media to protect **LCP** on mobile.
+* `metadataBase` + canonical to avoid duplicates and fix social previews.
+* Image sizes set for responsive breakpoints; defer non‑critical JS.
+
+---
+
+## Links
+
+* **Live site:** [https://www.cocktailsndreams.art](https://www.cocktailsndreams.art)
+
