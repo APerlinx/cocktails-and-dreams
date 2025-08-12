@@ -3,6 +3,7 @@ import { ReactNode } from 'react'
 import LazyMenuModal from './_components/LazyMenuModal'
 import './_styles/globals.css'
 import { ModalProvider } from './context/MenuContext'
+import { Geist, Geist_Mono } from 'next/font/google'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.cocktailsndreams.art'),
@@ -40,6 +41,16 @@ export const metadata: Metadata = {
   },
 }
 
+const geistSans = Geist({
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
+})
+
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+})
+
 type RootLayoutProps = {
   children: ReactNode
 }
@@ -50,7 +61,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <head>
         <link rel="preconnect" href="https://res.cloudinary.com" />
       </head>
-      <body className="antialiased">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <ModalProvider>
           {children}
           <LazyMenuModal />
