@@ -7,27 +7,26 @@ import HomeCard from './_components/HomeCard'
 export default async function Home() {
   const videoBg = await getStaticMedia('home-media')
   return (
-    <div className="grid min-h-[100svh] grid-rows-[1fr_auto]">
-      <div className="font-sans overflow-hidden items-center justify-items-center p-8 pb-36 sm:p-24  ">
-        <main className="flex flex-col row-start-2 items-center  ">
-          {videoBg[0].url ? (
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover z-[-1] [object-position:50%_85%]"
-              controls={false}
-              disablePictureInPicture
-              preload="metadata"
-              crossOrigin="anonymous"
-            >
-              <source src={videoBg[0].url} type="video/mp4" />
-            </video>
-          ) : (
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-secondary/10d via-primary/10 to-muted-foreground z-[-1]" />
-          )}
-
+    <div className="grid min-h-[100svh] grid-rows-[1fr_auto] ">
+      <div className="font-sans">
+        {videoBg[0].url ? (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover z-[-1] [object-position:50%_85%]"
+            controls={false}
+            disablePictureInPicture
+            preload="metadata"
+            crossOrigin="anonymous"
+          >
+            <source src={videoBg[0].url} type="video/mp4" />
+          </video>
+        ) : (
+          <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-secondary/10d via-primary/10 to-muted-foreground z-[-1]" />
+        )}
+        <main className="flex flex-col row-start-2 items-center p-8 pb-36 sm:p-24 overflow-hidden justify-items-center    ">
           <Image
             className="self-center"
             src="https://res.cloudinary.com/dlvlvj00u/image/upload/v1754993623/logo_pgorvi.svg"
