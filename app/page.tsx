@@ -41,7 +41,7 @@ export default async function Home() {
           <div className="flex gap-4 items-center flex-row">
             <NavigateButton
               href="/gallery"
-              className=" bg-foreground/80 text-background hover:bg-[#383838] "
+              className=" bg-foreground/80 text-background hover:bg-[#383838] px-5 w-full h-12"
             >
               <Image
                 className="text-background"
