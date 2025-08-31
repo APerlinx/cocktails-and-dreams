@@ -7,9 +7,9 @@ import HomeCard from './_components/HomeCard'
 export default async function Home() {
   const videoBg = await getStaticMedia('home-media')
   return (
-    <div className="grid grid-rows-[1fr_auto] sm:min-h-screen sm:pb-2">
-      <div className="font-sans overflow-hidden items-center justify-items-center p-8 pb-36 sm:p-24 ">
-        <main className="flex flex-col gap-[32px] row-start-2 items-center ">
+    <div className="grid min-h-[100svh] grid-rows-[1fr_auto]">
+      <div className="font-sans overflow-hidden items-center justify-items-center p-8 pb-36 sm:p-24  ">
+        <main className="flex flex-col row-start-2 items-center  ">
           {videoBg[0].url ? (
             <video
               autoPlay
@@ -38,7 +38,7 @@ export default async function Home() {
             crossOrigin="anonymous"
           />
 
-          <div className="flex gap-4 items-center flex-row">
+          <div className="flex gap-4 items-center flex-row pb-8">
             <NavigateButton
               href="/gallery"
               className=" bg-foreground/80 text-background hover:bg-[#383838] px-5 w-full h-12"

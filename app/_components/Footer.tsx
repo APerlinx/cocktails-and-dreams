@@ -43,13 +43,13 @@ function Footer(): ReactElement {
 
   return (
     <footer
-      className={`row-start-3 flex gap-[24px] flex-wrap items-center justify-center ${textColorClass} `}
+      className={`row-start-3 flex gap-[12px] sm:gap-[36px] flex-wrap items-center justify-center ${textColorClass} pb-4`}
     >
       {links.map(({ href, text, icon }) => {
         const isExternal = href.startsWith('http')
         const isLoading = loadingLink === href
 
-        const commonClass = `flex items-center gap-2 hover:underline hover:underline-offset-4 transition-opacity ${
+        const commonClass = `flex items-center gap-1 sm:gap-2 hover:underline hover:underline-offset-4 transition-opacity ${
           isLoading ? 'opacity-50 pointer-events-none' : ''
         } ${pathname === href ? 'underline underline-offset-4' : ''}`
 
