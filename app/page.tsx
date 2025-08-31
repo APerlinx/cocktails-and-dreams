@@ -16,7 +16,7 @@ export default async function Home() {
               loop
               muted
               playsInline
-              className="absolute inset-0 w-full h-full object-cover z-[-1]"
+              className="absolute inset-0 w-full h-full object-cover z-[-1] [object-position:50%_85%]"
               controls={false}
               disablePictureInPicture
               preload="metadata"
